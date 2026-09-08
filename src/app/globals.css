@@ -1,26 +1,209 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-ink: #121a14;
+  --color-ink-soft: #4d5e53;
+  --color-ink-faint: #7d8f83;
+
+  --color-cream: #fdfaf3;
+  --color-cream-deep: #f3ede0;
+  --color-cream-line: #e5dac4;
+
+  --color-primary: #0d4722;
+  --color-primary-dark: #072613;
+  --color-primary-light: #166838;
+  --color-primary-tint: #edf6f0;
+
+  --color-gold: #b88a2e;
+  --color-gold-light: #dfb86c;
+  --color-gold-tint: #faf4e8;
+
+  --color-forest: #166838;
+  --color-forest-dark: #072613;
+
+  --color-surface: #ffffff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-ink-faint: var(--color-ink-faint);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-cream: var(--color-cream);
+  --color-cream-deep: var(--color-cream-deep);
+  --color-cream-line: var(--color-cream-line);
+
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-tint: var(--color-primary-tint);
+
+  --color-gold: var(--color-gold);
+  --color-gold-light: var(--color-gold-light);
+  --color-gold-tint: var(--color-gold-tint);
+
+  --color-forest: var(--color-forest);
+  --color-forest-dark: var(--color-forest-dark);
+
+  --color-surface: var(--color-surface);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-geist-sans);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-kenburns: kenburns 22s ease-in-out infinite alternate;
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-drift: drift 24s ease-in-out infinite alternate;
+  --animate-drift-slow: drift 32s ease-in-out infinite alternate-reverse;
+  --animate-scale-in: scale-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-pop-in: pop-in 0.8s cubic-bezier(0.22, 1.6, 0.36, 1) forwards;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes kenburns {
+    from {
+      transform: scale(1) translate3d(0, 0, 0);
+    }
+    to {
+      transform: scale(1.08) translate3d(-1.5%, -1.5%, 0);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes drift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(24px, -20px, 0);
+    }
+  }
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 16px -4px rgba(184, 138, 46, 0.25);
+    }
+    50% {
+      box-shadow: 0 0 28px 4px rgba(184, 138, 46, 0.55);
+    }
+  }
+  @keyframes pop-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.7) translateY(60px) rotate(var(--pop-rotate, -5deg));
+    }
+    55% {
+      opacity: 1;
+      transform: scale(1.06) translateY(-10px) rotate(calc(var(--pop-rotate, -5deg) * -0.2));
+    }
+    80% {
+      transform: scale(0.98) translateY(3px) rotate(0deg);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0) rotate(0deg);
+    }
   }
 }
 
+html {
+  scroll-padding-top: 88px;
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-gold-light);
+  color: var(--color-primary-dark);
+}
+
+/* Reveal-on-scroll: elements start hidden, .is-visible triggers the animation */
+.reveal {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: var(--animate-fade-up);
+}
+
+/* Product cards get a punchier, alternating pop-in instead of the plain
+   fade-up, so the grid feels distinct from every other reveal-on-scroll
+   section on the site. */
+.reveal.product-pop:nth-child(odd) {
+  --pop-rotate: -6deg;
+}
+.reveal.product-pop:nth-child(even) {
+  --pop-rotate: 6deg;
+}
+.reveal.product-pop.is-visible {
+  animation: var(--animate-pop-in);
+}
+
+/* Subtle film-grain texture used behind placeholder visuals and dark sections */
+.bg-grain {
+  position: relative;
+  isolation: isolate;
+}
+.bg-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    animation: none !important;
+  }
+  .animate-kenburns,
+  .animate-float,
+  .animate-drift,
+  .animate-drift-slow {
+    animation: none !important;
+  }
 }
