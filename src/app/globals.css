@@ -47,8 +47,8 @@
 
   --color-surface: var(--color-surface);
 
-  --font-display: var(--font-fraunces);
-  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-plus-jakarta-sans);
+  --font-sans: var(--font-inter);
 
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-marquee: marquee 32s linear infinite;

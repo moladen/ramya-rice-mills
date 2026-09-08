@@ -35,8 +35,12 @@ export default function ContactPage() {
           <Reveal className="flex flex-col gap-8">
             <div className="grid gap-5 sm:grid-cols-2">
               {CONTACT_ITEMS.map((item) => (
-                <div key={item.label} className="flex flex-col gap-3 rounded-2xl border border-cream-line bg-surface p-6">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-tint text-primary">
+                <div
+                  key={item.label}
+                  className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-cream-line bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_20px_44px_-28px_rgba(28,26,23,0.35)]"
+                >
+                  <span className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gradient-to-r from-gold via-gold-light to-gold transition-transform duration-500 ease-out group-hover:scale-x-100" />
+                  <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-primary-tint text-primary ring-1 ring-primary/10 transition-all duration-300 group-hover:bg-gold-tint group-hover:text-gold group-hover:ring-gold/30">
                     <item.icon className="h-5 w-5" />
                   </span>
                   <span className="text-xs font-semibold uppercase tracking-wide text-ink-faint">{item.label}</span>
@@ -61,8 +65,9 @@ export default function ContactPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={100} className="rounded-3xl border border-cream-line bg-surface p-6 sm:p-10">
-            <h2 className="mb-6 font-display text-2xl text-ink">Business Enquiry Form</h2>
+          <Reveal delay={100} className="relative overflow-hidden rounded-3xl border border-cream-line bg-surface p-6 shadow-[0_28px_64px_-32px_rgba(28,26,23,0.25)] sm:p-10">
+            <span className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-primary via-gold to-primary" />
+            <h2 className="mb-6 font-display text-2xl font-semibold text-ink">Business Enquiry Form</h2>
             <EnquiryForm />
           </Reveal>
         </Container>

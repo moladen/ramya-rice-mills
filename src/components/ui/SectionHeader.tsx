@@ -15,13 +15,15 @@ export function SectionHeader({
 }) {
   const alignClasses = align === "center" ? "items-center text-center mx-auto" : "items-start text-left";
   const eyebrowColor = tone === "dark" ? "text-gold-light" : "text-gold";
+  const ruleColor = tone === "dark" ? "bg-gold-light/70" : "bg-gold/70";
   const titleColor = tone === "dark" ? "text-cream" : "text-ink";
   const descColor = tone === "dark" ? "text-cream/70" : "text-ink-soft";
 
   return (
     <div className={`flex max-w-2xl flex-col gap-4 ${alignClasses}`}>
       {eyebrow ? (
-        <span className={`text-xs font-semibold uppercase tracking-[0.28em] ${eyebrowColor}`}>
+        <span className={`flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.28em] ${eyebrowColor}`}>
+          <span className={`h-px w-6 ${ruleColor}`} />
           {eyebrow}
         </span>
       ) : null}

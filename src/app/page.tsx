@@ -112,7 +112,7 @@ export default function Home() {
 
             <Reveal delay={90}>
               <h1 className="max-w-xl font-display text-4xl leading-[1.08] text-cream sm:text-5xl lg:text-[3.75rem]">
-                Premium Rice, Milled with <em className="italic text-gold-light">Precision</em>{" "}
+                Premium Rice, Milled with <em className="not-italic text-gold-light">Precision</em>{" "}
                 for a Global Table
               </h1>
             </Reveal>

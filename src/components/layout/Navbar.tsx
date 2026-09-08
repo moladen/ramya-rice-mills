@@ -38,6 +38,28 @@ export function Navbar() {
     setOpen(false);
   }, [pathname]);
 
+  // Close the mobile drawer on any tap/click outside the header (button +
+  // drawer). Listens on the capture phase so it still catches the event even
+  // if a child stops propagation, and only attaches while open so it never
+  // interferes with normal page interaction.
+  useEffect(() => {
+    if (!open) return;
+
+    const handleOutsideInteraction = (event: MouseEvent | TouchEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideInteraction, true);
+    document.addEventListener("touchstart", handleOutsideInteraction, true);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideInteraction, true);
+      document.removeEventListener("touchstart", handleOutsideInteraction, true);
+    };
+  }, [open]);
+
   const toggleMobileGroup = (label: string) => {
     setMobileExpanded((prev) => ({ ...prev, [label]: !prev[label] }));
   };
