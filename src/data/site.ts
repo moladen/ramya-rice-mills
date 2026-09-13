@@ -13,7 +13,7 @@ export const SITE = {
   legalName: "Ramya Rice Mills LLP",
   tagline: "Rooted in India, Reaching the World",
   shortDescription:
-    "A rice manufacturing and export house built on consistent quality, modern processing infrastructure, and reliable bulk supply for domestic and international B2B partners.",
+    "Ramya Rice is a rice manufacturing and export business focused on consistent quality, modern processing, and dependable supply for domestic and international B2B markets.",
   contact: {
     phoneDisplay: "+91 99118 95555",
     phoneHref: "tel:+919911895555",

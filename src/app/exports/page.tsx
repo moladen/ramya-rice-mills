@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -8,12 +7,14 @@ import { FeatureCard } from "@/components/ui/FeatureCard";
 import { CTASection } from "@/components/ui/CTASection";
 import { Badge } from "@/components/ui/Badge";
 import { GlobeIcon, PackageIcon, TruckIcon, ShieldCheckIcon } from "@/components/icons";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Exports / Global Presence",
   description:
     "Ramya Rice's export capability and approach to logistics for international B2B rice buyers.",
-};
+  path: "/exports",
+});
 
 const EXPORT_CAPABILITIES = [
   { icon: PackageIcon, title: "Export Packaging", description: "Packaging formats suited to container loads and international shipment norms." },

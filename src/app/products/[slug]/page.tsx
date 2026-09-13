@@ -11,6 +11,7 @@ import { ProductCard } from "@/components/ui/ProductCard";
 import { GrainIcon, LeafIcon, WheatIcon, ChevronRightIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { PRODUCTS, getProductBySlug } from "@/data/products";
 import { whatsappLink, productEnquiryMessage } from "@/lib/whatsapp";
+import { buildMetadata } from "@/lib/seo";
 
 const ICONS = { grain: GrainIcon, leaf: LeafIcon, wheat: WheatIcon };
 
@@ -24,10 +25,12 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return { title: "Product Not Found" };
-  return {
+  return buildMetadata({
     title: product.name,
     description: product.shortDescription,
-  };
+    path: `/products/${product.slug}`,
+    image: product.image,
+  });
 }
 
 export default async function ProductDetailPage({ params }: { params: Params }) {

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -7,12 +6,14 @@ import { Badge } from "@/components/ui/Badge";
 import { CTASection } from "@/components/ui/CTASection";
 import { ShieldCheckIcon } from "@/components/icons";
 import { CERTIFICATION_SLOTS } from "@/data/certifications";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Certifications",
   description:
     "Certification and credential information for Ramya Rice will be published here once verified.",
-};
+  path: "/certifications",
+});
 
 export default function CertificationsPage() {
   return (

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
@@ -7,12 +6,14 @@ import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { PhoneIcon, MailIcon, MapPinIcon, WhatsAppIcon } from "@/components/icons";
 import { SITE } from "@/data/site";
 import { whatsappLink, GENERAL_ENQUIRY_MESSAGE } from "@/lib/whatsapp";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Contact Us",
   description:
     "Get in touch with Ramya Rice for wholesale, retail, HORECA, bulk, or export rice enquiries.",
-};
+  path: "/contact",
+});
 
 const CONTACT_ITEMS = [
   { icon: PhoneIcon, label: "Call Us", value: SITE.contact.phoneDisplay, href: SITE.contact.phoneHref },

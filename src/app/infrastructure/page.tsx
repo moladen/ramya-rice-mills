@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -7,12 +6,14 @@ import { Visual } from "@/components/ui/Visual";
 import { CTASection } from "@/components/ui/CTASection";
 import { FactoryIcon, GearIcon, WarehouseIcon, PackageIcon, FlaskIcon, TruckIcon } from "@/components/icons";
 import { INFRASTRUCTURE_AREAS } from "@/data/infrastructure";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Infrastructure",
   description:
     "A look at Ramya Rice's manufacturing facility, machinery, storage, and packaging capability.",
-};
+  path: "/infrastructure",
+});
 
 const ICONS = { factory: FactoryIcon, gear: GearIcon, warehouse: WarehouseIcon, package: PackageIcon, flask: FlaskIcon, truck: TruckIcon };
 const TONES = ["forest", "gold", "night", "cream"] as const;

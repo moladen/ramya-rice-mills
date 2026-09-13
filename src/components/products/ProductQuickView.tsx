@@ -7,6 +7,7 @@ import type { Product } from "@/data/products";
 import { Button } from "@/components/ui/Button";
 import { CloseIcon, WhatsAppIcon, CheckIcon } from "@/components/icons";
 import { whatsappLink, productEnquiryMessage } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/analytics";
 
 interface ProductQuickViewProps {
   product: Product | null;
@@ -16,6 +17,7 @@ interface ProductQuickViewProps {
 export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
   useEffect(() => {
     if (!product) return;
+    trackEvent("view_item", { item_name: product.name, item_category: product.category });
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };

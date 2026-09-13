@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
@@ -15,12 +14,14 @@ import {
   GlobeIcon,
   TruckIcon,
 } from "@/components/icons";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "About Us",
   description:
     "Learn about Ramya Rice — our story, vision, mission, and the values behind our rice manufacturing and export business.",
-};
+  path: "/about",
+});
 
 const VALUES = [
   { icon: ShieldCheckIcon, title: "Quality First", description: "Every batch is expected to meet a consistent internal quality bar before it ships." },

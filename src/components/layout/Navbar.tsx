@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { MenuIcon, CloseIcon, ChevronRightIcon, PhoneIcon } from "@/components/icons";
 import { HEADER_NAV, type HeaderNavItem } from "@/data/nav";
 import { SITE } from "@/data/site";
+import { trackEvent } from "@/lib/analytics";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -58,6 +59,16 @@ export function Navbar() {
       document.removeEventListener("mousedown", handleOutsideInteraction, true);
       document.removeEventListener("touchstart", handleOutsideInteraction, true);
     };
+  }, [open]);
+
+  // Escape closes the mobile drawer too.
+  useEffect(() => {
+    if (!open) return;
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [open]);
 
   const toggleMobileGroup = (label: string) => {
@@ -188,6 +199,7 @@ export function Navbar() {
             variant="secondary"
             size="md"
             className="hover:scale-105 shadow-sm"
+            onClick={() => trackEvent("enquire_click", { location: "navbar" })}
           >
             Enquire Now
           </Button>
@@ -270,7 +282,10 @@ export function Navbar() {
               variant="primary"
               size="lg"
               className="w-full justify-center"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                trackEvent("enquire_click", { location: "mobile_menu" });
+                setOpen(false);
+              }}
             >
               Enquire Now
             </Button>

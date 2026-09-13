@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { PRODUCTS } from "@/data/products";
 import { whatsappLink, GENERAL_ENQUIRY_MESSAGE } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/analytics";
 
 type FormState = {
   name: string;
@@ -62,6 +63,7 @@ export function EnquiryForm() {
       // NOTE: no backend is wired yet — replace this block with a call to the
       // client's enquiry API / email service (e.g. POST /api/enquiry) once available.
       await new Promise((resolve) => setTimeout(resolve, 700));
+      trackEvent("generate_lead", { form: "enquiry_form", product: values.product || undefined });
       setStatus("success");
       setValues(INITIAL_STATE);
     } catch {

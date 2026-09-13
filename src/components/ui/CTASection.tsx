@@ -1,8 +1,11 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppIcon } from "@/components/icons";
 import { whatsappLink, GENERAL_ENQUIRY_MESSAGE } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/analytics";
 
 export function CTASection({
   title = "Let's Talk Business",
@@ -27,7 +30,12 @@ export function CTASection({
             {description}
           </p>
           <div className="mt-2 flex flex-col gap-4 sm:flex-row">
-            <Button href="/contact" variant="primary" size="lg">
+            <Button
+              href="/contact"
+              variant="primary"
+              size="lg"
+              onClick={() => trackEvent("enquire_click", { location: "cta_section" })}
+            >
               Request a Quote
             </Button>
             <Button
@@ -37,6 +45,7 @@ export function CTASection({
               variant="outline-light"
               size="lg"
               icon={<WhatsAppIcon className="h-5 w-5" />}
+              onClick={() => trackEvent("whatsapp_click", { location: "cta_section" })}
             >
               Enquire on WhatsApp
             </Button>
