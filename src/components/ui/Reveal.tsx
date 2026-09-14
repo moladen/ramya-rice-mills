@@ -6,10 +6,12 @@ export function Reveal({
   children,
   delay = 0,
   className = "",
+  role,
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
+  role?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -55,6 +57,7 @@ export function Reveal({
       ref={ref}
       className={`reveal ${className}`}
       style={{ animationDelay: `${delay}ms` }}
+      role={role}
     >
       {children}
     </div>
