@@ -49,7 +49,7 @@ export default function InfrastructurePage() {
                     icon={Icon}
                     tone={TONES[i % TONES.length]}
                     ratio="aspect-[4/3]"
-                    label={`${area.name} — Placeholder`}
+                    label={`${area.name} (Placeholder)`}
                     photo={PHOTOS[area.key]}
                     alt={area.name}
                   />

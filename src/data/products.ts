@@ -28,7 +28,7 @@ export const PRODUCTS: Product[] = [
     badge: "Aged 24 Months • Extra Long",
     shortDescription: "Long-grain aromatic basmati, aged for extra length and fragrance.",
     description:
-      "An extra-long grain basmati positioned for premium retail and export shelves. Aged to improve aroma, cooked-grain elongation, and texture. Placeholder copy — replace with the client's actual grade and sourcing details.",
+      "An extra-long grain basmati positioned for premium retail and export shelves. Aged to improve aroma, cooked-grain elongation, and texture. Placeholder copy: replace with the client's actual grade and sourcing details.",
     specs: [
       { label: "Grain Type", value: "Extra-Long Grain" },
       { label: "Average Length", value: "8.35 mm (Aged)" },
@@ -48,7 +48,7 @@ export const PRODUCTS: Product[] = [
     badge: "Golden Steam • Firm Texture",
     shortDescription: "Steam-processed basmati offering firm texture and non-sticky grains.",
     description:
-      "Steam processing locks in nutrients and delivers separate, non-sticky grains after cooking — well suited to bulk catering and HORECA kitchens. Placeholder copy — confirm processing details with the client.",
+      "Steam processing locks in nutrients and delivers separate, non-sticky grains after cooking, well suited to bulk catering and HORECA kitchens. Placeholder copy: confirm processing details with the client.",
     specs: [
       { label: "Grain Type", value: "Long Grain, Steamed" },
       { label: "Average Length", value: "8.20 mm" },
@@ -68,7 +68,7 @@ export const PRODUCTS: Product[] = [
     badge: "Aromatic • Everyday Classic",
     shortDescription: "Lightweight, medium-grain rice popular for everyday household cooking.",
     description:
-      "A lightweight, aromatic medium-grain rice widely used in South Indian households and restaurants. Placeholder copy — replace with verified sourcing region and grade information.",
+      "A lightweight, aromatic medium-grain rice widely used in South Indian households and restaurants. Placeholder copy: replace with verified sourcing region and grade information.",
     specs: [
       { label: "Grain Type", value: "Medium Grain" },
       { label: "Polish", value: "Silky Polish / Raw" },
@@ -88,7 +88,7 @@ export const PRODUCTS: Product[] = [
     badge: "High Yield • Bulk Export",
     shortDescription: "High-yield, cost-efficient long-grain rice for bulk and export orders.",
     description:
-      "A dependable long-grain variety favoured for large-volume institutional and export orders where consistent supply and cost-efficiency matter most. Placeholder copy — confirm grade specifications with the client.",
+      "A dependable long-grain variety favoured for large-volume institutional and export orders where consistent supply and cost-efficiency matter most. Placeholder copy: confirm grade specifications with the client.",
     specs: [
       { label: "Grain Type", value: "Long Grain Raw / Parboiled" },
       { label: "Broken %", value: "5% / 25% Sortex" },
@@ -106,9 +106,9 @@ export const PRODUCTS: Product[] = [
     icon: "wheat",
     image: "/images/products/sona-masoori.jpg",
     badge: "Traditional South Indian Soft Grain",
-    shortDescription: "Short, sturdy grains with a soft texture — a South Indian staple.",
+    shortDescription: "Short, sturdy grains with a soft texture, a South Indian staple.",
     description:
-      "A short-grain variety valued for its soft texture once cooked, widely used across South Indian kitchens and eateries. Placeholder copy — replace with the client's actual product notes.",
+      "A short-grain variety valued for its soft texture once cooked, widely used across South Indian kitchens and eateries. Placeholder copy: replace with the client's actual product notes.",
     specs: [
       { label: "Grain Type", value: "Short Grain Boiled" },
       { label: "Polish", value: "Double Polished" },
@@ -128,7 +128,7 @@ export const PRODUCTS: Product[] = [
     badge: "100% Whole Grain • Nutrient Rich",
     shortDescription: "Minimally milled whole-grain rice for health-focused product lines.",
     description:
-      "Whole-grain rice with the bran layer retained, positioned for health-conscious retail and private-label ranges. Placeholder copy — confirm variety and nutritional claims with the client before publishing.",
+      "Whole-grain rice with the bran layer retained, positioned for health-conscious retail and private-label ranges. Placeholder copy: confirm variety and nutritional claims with the client before publishing.",
     specs: [
       { label: "Grain Type", value: "Whole Grain Unpolished" },
       { label: "Fiber", value: "High Fiber Natural" },

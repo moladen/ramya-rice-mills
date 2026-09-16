@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Products",
   description:
-    "Browse Ramya Rice's rice portfolio — Basmati, Non-Basmati, and other rice varieties packed for retail, wholesale, HORECA, and export.",
+    "Browse Ramya Rice's rice portfolio: Basmati, Non-Basmati, and other rice varieties packed for retail, wholesale, HORECA, and export.",
   path: "/products",
 });
 

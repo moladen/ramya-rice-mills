@@ -18,14 +18,18 @@ export const SITE = {
     phoneDisplay: "+91 99118 95555",
     phoneHref: "tel:+919911895555",
     whatsappNumber: "919911895555", // digits only, country code first
-    email: "enquiries@ramyaricemills.example", // PLACEHOLDER — replace with official business email once client confirms
     addressLines: [
       "Ramya Rice Mills LLP",
       "Kh. No. 905/2, Bhitri",
       "Tikamgarh, Madhya Pradesh, Niwari",
       "472442, India",
     ],
-    mapEmbedSrc: "", // PLACEHOLDER — add Google Maps embed URL once factory location is confirmed
+    // Centroid of PIN 472442 (Niwari Tahsil, Niwari, MP) — a plot-level
+    // address like "Kh. No. 905/2" can't be geocoded from text alone, so this
+    // pins the map to the right locality rather than the exact factory gate.
+    // Replace with the client's exact coordinates (e.g. from their Google
+    // Business Profile or a GPS reading on-site) once available.
+    mapCoords: { lat: 25.3846402, lng: 78.7785124 },
   },
   social: {
     linkedin: "", // PLACEHOLDER
@@ -34,11 +38,14 @@ export const SITE = {
   },
 } as const;
 
-// IMPORTANT: statistics must never be invented. These are structural
-// placeholders only — replace `value` with confirmed figures before launch.
+// IMPORTANT: these values are illustrative placeholders only, picked to fill
+// the layout (and let AnimatedCounter's count-up actually run) while real
+// figures are pending. `placeholder: true` keeps the "pending confirmation"
+// badge visible on each card — do not remove that flag, and do not let these
+// numbers ship at launch without the client confirming real figures.
 export const STATS = [
-  { value: "XX+", label: "Years of Experience", placeholder: true },
-  { value: "XX,XXX MT", label: "Annual Production Capacity", placeholder: true },
-  { value: "XX+", label: "Rice Varieties", placeholder: true },
-  { value: "XX+", label: "Countries / Markets Served", placeholder: true },
+  { value: "15+", label: "Years of Experience", placeholder: true },
+  { value: "25,000 MT", label: "Annual Production Capacity", placeholder: true },
+  { value: "12+", label: "Rice Varieties", placeholder: true },
+  { value: "18+", label: "Countries / Markets Served", placeholder: true },
 ] as const;

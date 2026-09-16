@@ -17,7 +17,7 @@ export function StatCard({
       <span className="text-sm text-cream/70">{label}</span>
       {placeholder ? (
         <span className="text-[0.65rem] uppercase tracking-widest text-cream/40">
-          Placeholder — pending confirmation
+          Placeholder (pending confirmation)
         </span>
       ) : null}
     </div>

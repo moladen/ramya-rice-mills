@@ -21,7 +21,7 @@ export default function CertificationsPage() {
       <PageHero
         eyebrow="Certifications"
         title="Trust, Backed by Documentation"
-        description="We only publish certifications once they are verified and confirmed by Ramya Rice — no credential is assumed or invented on this page."
+        description="We only publish certifications once they are verified and confirmed by Ramya Rice. No credential is assumed or invented on this page."
       />
 
       <section className="py-20 sm:py-28">

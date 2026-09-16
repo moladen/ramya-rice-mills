@@ -77,17 +77,17 @@ export default function ExportsPage() {
               align="center"
               tone="dark"
             />
-            <Badge tone="pending">Country / region list — pending confirmation</Badge>
+            <Badge tone="pending">Country / region list (pending confirmation)</Badge>
           </Reveal>
           <Reveal delay={100} className="w-full max-w-2xl">
-            <Visual icon={GlobeIcon} tone="night" ratio="aspect-[16/9]" iconSize="h-16 w-16" label="World Map — Placeholder" />
+            <Visual icon={GlobeIcon} tone="night" ratio="aspect-[16/9]" iconSize="h-16 w-16" label="World Map (Placeholder)" />
           </Reveal>
         </Container>
       </section>
 
       <CTASection
         title="Looking to Import from Us?"
-        description="Share your destination country and required quantity — we'll respond with export options."
+        description="Share your destination country and required quantity, and we'll respond with export options."
       />
     </>
   );

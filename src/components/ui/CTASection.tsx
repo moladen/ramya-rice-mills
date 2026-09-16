@@ -9,7 +9,7 @@ import { trackEvent } from "@/lib/analytics";
 
 export function CTASection({
   title = "Let's Talk Business",
-  description = "Share your requirement — variety, quantity, and destination — and our team will get back with a tailored quote.",
+  description = "Share your requirement (variety, quantity, and destination) and our team will get back with a tailored quote.",
 }: {
   title?: string;
   description?: string;

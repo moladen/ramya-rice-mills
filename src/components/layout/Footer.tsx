@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Logo } from "@/components/layout/Logo";
 import { NAV_LINKS } from "@/data/nav";
 import { SITE } from "@/data/site";
-import { MailIcon, MapPinIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
+import { MapPinIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
 import { whatsappLink, GENERAL_ENQUIRY_MESSAGE } from "@/lib/whatsapp";
 
 const LEGAL_LINKS = [
@@ -87,12 +87,6 @@ export function Footer() {
                 className="hover:text-cream"
               >
                 Chat on WhatsApp
-              </a>
-            </li>
-            <li className="flex items-start gap-3">
-              <MailIcon className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" />
-              <a href={`mailto:${SITE.contact.email}`} className="hover:text-cream">
-                {SITE.contact.email}
               </a>
             </li>
             <li className="flex items-start gap-3">

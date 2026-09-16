@@ -216,7 +216,7 @@ export default function Home() {
             </h2>
             <p className="max-w-md text-base leading-relaxed text-ink-soft">
               From sourcing to dispatch, our focus stays on consistent grain quality and dependable
-              supply — for domestic wholesale partners and international B2B buyers alike.
+              supply for domestic wholesale partners and international B2B buyers alike.
             </p>
             <ul className="flex flex-col gap-2.5 border-t border-cream-line pt-5">
               <li className="flex items-start gap-2.5 text-sm text-ink-soft">
@@ -404,7 +404,7 @@ export default function Home() {
             <SectionHeader
               eyebrow="Business Solutions"
               title="Built Around Your Business"
-              description="Wholesale, retail, HORECA, bulk, export and private-label supply — choose the model that fits your business."
+              description="Wholesale, retail, HORECA, bulk, export and private-label supply: choose the model that fits your business."
             />
             <Button href="/business-solutions" variant="primary" size="md" className="w-fit group" icon={<ChevronRightIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />}>
               Explore Solutions

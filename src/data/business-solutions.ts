@@ -75,7 +75,7 @@ export const BUSINESS_SOLUTIONS: BusinessSolution[] = [
     points: [
       "Custom packaging on request",
       "Grade and pack-size flexibility",
-      "Available on a case-by-case basis — enquire for details",
+      "Available on a case-by-case basis (enquire for details)",
     ],
   },
 ];

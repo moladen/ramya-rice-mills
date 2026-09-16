@@ -13,21 +13,21 @@ export type CertificationSlot = {
 export const CERTIFICATION_SLOTS: CertificationSlot[] = [
   {
     key: "cert-1",
-    suggestedName: "Certification Name — Pending",
+    suggestedName: "Certification Name (Pending)",
     description:
       "e.g. FSSAI license. Awaiting confirmation and documentation from Ramya Rice.",
     status: "pending",
   },
   {
     key: "cert-2",
-    suggestedName: "Certification Name — Pending",
+    suggestedName: "Certification Name (Pending)",
     description:
       "e.g. ISO certification. Awaiting confirmation and documentation from Ramya Rice.",
     status: "pending",
   },
   {
     key: "cert-3",
-    suggestedName: "Certification Name — Pending",
+    suggestedName: "Certification Name (Pending)",
     description:
       "e.g. APEDA registration. Awaiting confirmation and documentation from Ramya Rice.",
     status: "pending",

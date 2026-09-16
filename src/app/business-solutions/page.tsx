@@ -11,7 +11,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Business Solutions",
   description:
-    "B2B supply solutions from Ramya Rice — wholesale, retail, HORECA, bulk supply, export, and private label.",
+    "B2B supply solutions from Ramya Rice: wholesale, retail, HORECA, bulk supply, export, and private label.",
   path: "/business-solutions",
 });
 
@@ -46,7 +46,7 @@ export default function BusinessSolutionsPage() {
                     icon={Icon}
                     tone={TONES[i % TONES.length]}
                     ratio="aspect-[4/3]"
-                    label={`${solution.name} — Placeholder`}
+                    label={`${solution.name} (Placeholder)`}
                     photo={PHOTOS[solution.key]}
                     alt={solution.name}
                   />

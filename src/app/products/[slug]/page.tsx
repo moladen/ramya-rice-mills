@@ -9,13 +9,40 @@ import { Badge } from "@/components/ui/Badge";
 import { CTASection } from "@/components/ui/CTASection";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { GrainIcon, LeafIcon, WheatIcon, ChevronRightIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
-import { PRODUCTS, getProductBySlug } from "@/data/products";
+import { PRODUCTS, getProductBySlug, type Product } from "@/data/products";
 import { whatsappLink, productEnquiryMessage } from "@/lib/whatsapp";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, SITE_URL } from "@/lib/seo";
+import { SITE } from "@/data/site";
 
 const ICONS = { grain: GrainIcon, leaf: LeafIcon, wheat: WheatIcon };
 
 type Params = Promise<{ slug: string }>;
+
+// Uses only fields already on the product record — no price, availability,
+// rating, review, or SKU, since none of that is verified client data yet.
+function buildProductJsonLd(product: Product) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.shortDescription,
+    image: `${SITE_URL}${product.image}`,
+    url: `${SITE_URL}/products/${product.slug}`,
+    brand: { "@type": "Brand", name: SITE.name },
+  };
+}
+
+function buildBreadcrumbJsonLd(product: Product) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Products", item: `${SITE_URL}/products` },
+      { "@type": "ListItem", position: 3, name: product.name, item: `${SITE_URL}/products/${product.slug}` },
+    ],
+  };
+}
 
 export async function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
@@ -43,6 +70,14 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildProductJsonLd(product)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd(product)) }}
+      />
       <section className="border-b border-cream-line bg-cream-deep py-6">
         <Container>
           <nav className="flex items-center gap-2 text-xs text-ink-soft">
@@ -77,7 +112,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                 ) : null}
               </div>
               <h1 className="font-display text-3xl text-ink sm:text-4xl">{product.name}</h1>
-              {product.placeholder ? <Badge tone="pending">Sample product — confirm details before launch</Badge> : null}
+              {product.placeholder ? <Badge tone="pending">Sample product: confirm details before launch</Badge> : null}
               <p className="text-base leading-relaxed text-ink-soft">{product.description}</p>
             </div>
 

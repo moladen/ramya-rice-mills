@@ -19,7 +19,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "About Us",
   description:
-    "Learn about Ramya Rice — our story, vision, mission, and the values behind our rice manufacturing and export business.",
+    "Learn about Ramya Rice: our story, vision, mission, and the values behind our rice manufacturing and export business.",
   path: "/about",
 });
 
@@ -42,7 +42,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About Us"
         title="A Rice Manufacturing Business Built on Trust"
-        description="Get to know Ramya Rice — our story, our purpose, and the principles that guide how we work with partners."
+        description="Get to know Ramya Rice: our story, our purpose, and the principles that guide how we work with partners."
       />
 
       {/* Introduction */}
@@ -81,7 +81,7 @@ export default function AboutPage() {
             <SectionHeader
               eyebrow="Our Story"
               title="Company History"
-              description="Placeholder — this section will carry the founding story, milestones, and growth of Ramya Rice once the client shares the details."
+              description="Placeholder: this section will carry the founding story, milestones, and growth of Ramya Rice once the client shares the details."
             />
             <Badge tone="pending">Awaiting client-provided company history</Badge>
           </Reveal>

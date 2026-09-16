@@ -1,9 +1,8 @@
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
-import { Visual } from "@/components/ui/Visual";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
-import { PhoneIcon, MailIcon, MapPinIcon, WhatsAppIcon } from "@/components/icons";
+import { PhoneIcon, MapPinIcon, WhatsAppIcon } from "@/components/icons";
 import { SITE } from "@/data/site";
 import { whatsappLink, GENERAL_ENQUIRY_MESSAGE } from "@/lib/whatsapp";
 import { buildMetadata } from "@/lib/seo";
@@ -18,9 +17,14 @@ export const metadata = buildMetadata({
 const CONTACT_ITEMS = [
   { icon: PhoneIcon, label: "Call Us", value: SITE.contact.phoneDisplay, href: SITE.contact.phoneHref },
   { icon: WhatsAppIcon, label: "WhatsApp", value: SITE.contact.phoneDisplay, href: whatsappLink(GENERAL_ENQUIRY_MESSAGE) },
-  { icon: MailIcon, label: "Email", value: SITE.contact.email, href: `mailto:${SITE.contact.email}` },
   { icon: MapPinIcon, label: "Address", value: SITE.contact.addressLines.join(", "), href: undefined },
 ];
+
+// Pinned by coordinates (see SITE.contact.mapCoords) rather than the raw
+// address text — a text search on a plot-level address returns ambiguous
+// multi-city matches and zooms out to fit all of them.
+const { lat, lng } = SITE.contact.mapCoords;
+const MAP_EMBED_SRC = `https://www.google.com/maps?q=${lat},${lng}&z=14&output=embed`;
 
 export default function ContactPage() {
   return (
@@ -62,7 +66,15 @@ export default function ContactPage() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <Visual icon={MapPinIcon} tone="cream" ratio="aspect-[4/3]" label="Factory Location Map — Placeholder" />
+              <div className="aspect-[4/3] overflow-hidden rounded-3xl border border-cream-line">
+                <iframe
+                  src={MAP_EMBED_SRC}
+                  title="Ramya Rice Mills LLP location map"
+                  className="h-full w-full grayscale-[15%]"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
             </div>
           </Reveal>
 

@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Quality & Process",
   description:
-    "The journey our rice follows — sourcing, processing, cleaning, grading, quality testing, packaging, final inspection, and dispatch.",
+    "The journey our rice follows: sourcing, processing, cleaning, grading, quality testing, packaging, final inspection, and dispatch.",
   path: "/quality-process",
 });
 
@@ -20,7 +20,7 @@ export default function QualityProcessPage() {
       <PageHero
         eyebrow="Quality & Process"
         title="Every Batch Follows the Same Journey"
-        description="A consistent, repeatable process is what keeps grain quality dependable — from the first intake check to final dispatch."
+        description="A consistent, repeatable process is what keeps grain quality dependable, from the first intake check to final dispatch."
       />
 
       <section className="py-20 sm:py-28">
