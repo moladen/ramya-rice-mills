@@ -1,9 +1,12 @@
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
+// `placeholder` still arrives from STATS (see data/site.ts) and is deliberately
+// unused for display — the on-page "pending confirmation" caption was removed
+// on request, but the underlying values are still unconfirmed estimates. Do
+// not treat their presence here as a signal that they're safe to publish.
 export function StatCard({
   value,
   label,
-  placeholder,
 }: {
   value: string;
   label: string;
@@ -15,11 +18,6 @@ export function StatCard({
         <AnimatedCounter value={value} />
       </span>
       <span className="text-sm text-cream/70">{label}</span>
-      {placeholder ? (
-        <span className="text-[0.65rem] uppercase tracking-widest text-cream/40">
-          Placeholder (pending confirmation)
-        </span>
-      ) : null}
     </div>
   );
 }

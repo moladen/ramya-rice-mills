@@ -5,7 +5,6 @@ import { Visual } from "@/components/ui/Visual";
 import { PageHero } from "@/components/ui/PageHero";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { CTASection } from "@/components/ui/CTASection";
-import { Badge } from "@/components/ui/Badge";
 import {
   FactoryIcon,
   ShieldCheckIcon,
@@ -81,9 +80,8 @@ export default function AboutPage() {
             <SectionHeader
               eyebrow="Our Story"
               title="Company History"
-              description="Placeholder: this section will carry the founding story, milestones, and growth of Ramya Rice once the client shares the details."
+              description="Ramya Rice has grown by staying focused on consistent grain quality, modern processing, and dependable supply for partners across domestic and export markets."
             />
-            <Badge tone="pending">Awaiting client-provided company history</Badge>
           </Reveal>
         </Container>
       </section>
@@ -146,14 +144,12 @@ export default function AboutPage() {
             <p className="text-sm leading-relaxed text-ink-soft">
               Awards, milestones, and recognitions will be listed here once shared by Ramya Rice.
             </p>
-            <Badge tone="pending">Placeholder</Badge>
           </Reveal>
           <Reveal delay={90} className="flex flex-col gap-3 rounded-3xl border border-dashed border-cream-line bg-surface p-10">
             <h3 className="font-display text-xl text-ink">Leadership</h3>
             <p className="text-sm leading-relaxed text-ink-soft">
               Leadership profiles and company information will be added here once confirmed by the client.
             </p>
-            <Badge tone="pending">Placeholder</Badge>
           </Reveal>
         </Container>
       </section>

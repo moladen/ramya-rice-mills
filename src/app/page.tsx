@@ -7,7 +7,6 @@ import { Reveal } from "@/components/ui/Reveal";
 import { StatCard } from "@/components/ui/StatCard";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { CTASection } from "@/components/ui/CTASection";
-import { Badge } from "@/components/ui/Badge";
 import { HeroVisual } from "@/components/home/HeroVisual";
 import { ProductShowcase } from "@/components/home/ProductShowcase";
 import { QualityJourney } from "@/components/home/QualityJourney";
@@ -31,7 +30,6 @@ import { STATS, SITE } from "@/data/site";
 import { INFRASTRUCTURE_AREAS } from "@/data/infrastructure";
 import { QUALITY_PROCESS_STEPS } from "@/data/quality-process";
 import { BUSINESS_SOLUTIONS } from "@/data/business-solutions";
-import { CERTIFICATION_SLOTS } from "@/data/certifications";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -487,40 +485,7 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* CERTIFICATIONS */}
-      <section className="py-20 sm:py-28">
-        <Container className="flex flex-col gap-12">
-          <Reveal>
-            <SectionHeader
-              eyebrow="Certifications"
-              title="Trust, Backed by Documentation"
-              description="Certification details will appear here once verified and provided by Ramya Rice."
-              align="center"
-            />
-          </Reveal>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {CERTIFICATION_SLOTS.map((cert, i) => (
-              <Reveal key={cert.key} delay={i * 90}>
-                <div className="flex h-full flex-col items-center gap-4 rounded-2xl border border-dashed border-cream-line bg-cream-deep p-8 text-center">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-surface text-ink-faint">
-                    <ShieldCheckIcon className="h-7 w-7" />
-                  </span>
-                  <h3 className="text-sm font-semibold text-ink">{cert.suggestedName}</h3>
-                  <p className="text-xs leading-relaxed text-ink-soft">{cert.description}</p>
-                  <Badge tone="pending">Pending</Badge>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal delay={150} className="flex justify-center">
-            <Link href="/certifications" className="text-sm font-medium text-primary hover:text-gold">
-              View Certifications Page
-            </Link>
-          </Reveal>
-        </Container>
-      </section>
-
-      <CTASection />
+      <CTASection tone="light" />
     </>
   );
 }

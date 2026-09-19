@@ -46,7 +46,7 @@ export default function BusinessSolutionsPage() {
                     icon={Icon}
                     tone={TONES[i % TONES.length]}
                     ratio="aspect-[4/3]"
-                    label={`${solution.name} (Placeholder)`}
+                    label={solution.name}
                     photo={PHOTOS[solution.key]}
                     alt={solution.name}
                   />

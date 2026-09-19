@@ -3,7 +3,6 @@ import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/ui/CTASection";
-import { Badge } from "@/components/ui/Badge";
 import { QUALITY_PROCESS_STEPS } from "@/data/quality-process";
 import { buildMetadata } from "@/lib/seo";
 
@@ -68,12 +67,6 @@ export default function QualityProcessPage() {
               </Reveal>
             ))}
           </div>
-
-          <Reveal className="mx-auto max-w-2xl text-center">
-            <Badge tone="pending">
-              Specific technologies, lab tests, or certifications will be named only once confirmed by the client.
-            </Badge>
-          </Reveal>
         </Container>
       </section>
 

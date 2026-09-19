@@ -5,7 +5,6 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Visual } from "@/components/ui/Visual";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { CTASection } from "@/components/ui/CTASection";
-import { Badge } from "@/components/ui/Badge";
 import { GlobeIcon, PackageIcon, TruckIcon, ShieldCheckIcon } from "@/components/icons";
 import { buildMetadata } from "@/lib/seo";
 
@@ -77,10 +76,9 @@ export default function ExportsPage() {
               align="center"
               tone="dark"
             />
-            <Badge tone="pending">Country / region list (pending confirmation)</Badge>
           </Reveal>
           <Reveal delay={100} className="w-full max-w-2xl">
-            <Visual icon={GlobeIcon} tone="night" ratio="aspect-[16/9]" iconSize="h-16 w-16" label="World Map (Placeholder)" />
+            <Visual icon={GlobeIcon} tone="night" ratio="aspect-[16/9]" iconSize="h-16 w-16" label="World Map" />
           </Reveal>
         </Container>
       </section>
