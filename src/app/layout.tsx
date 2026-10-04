@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description: SITE.shortDescription,
     url: SITE_URL,
     siteName: SITE.name,
-    images: [{ url: "/images/hero-mill-showcase.png", width: 1200, height: 630, alt: DEFAULT_TITLE }],
+    images: [{ url: "/images/logo.png", width: 1024, height: 1024, alt: DEFAULT_TITLE }],
     locale: "en_IN",
     type: "website",
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: DEFAULT_TITLE,
     description: SITE.shortDescription,
-    images: ["/images/hero-mill-showcase.png"],
+    images: ["/images/logo.png"],
   },
 };
 

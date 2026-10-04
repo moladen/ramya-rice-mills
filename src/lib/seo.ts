@@ -17,12 +17,16 @@ export function buildMetadata({
   title,
   description,
   path = "/",
-  image = "/images/hero-mill-showcase.png",
+  image = "/images/logo.png",
+  imageWidth = 1024,
+  imageHeight = 1024,
 }: {
   title?: string;
   description: string;
   path?: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
 }): Metadata {
   const url = `${SITE_URL}${path}`;
   const fullTitle = title ? `${title} | ${SITE.name}` : "Ramya Rice Mills | Premium Indian Rice Manufacturer & Exporter";
@@ -39,7 +43,7 @@ export function buildMetadata({
       description,
       url,
       siteName: SITE.name,
-      images: [{ url: image, width: 1200, height: 630, alt: fullTitle }],
+      images: [{ url: image, width: imageWidth, height: imageHeight, alt: fullTitle }],
       locale: "en_IN",
       type: "website",
     },
