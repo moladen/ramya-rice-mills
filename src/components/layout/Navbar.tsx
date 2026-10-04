@@ -75,6 +75,15 @@ export function Navbar() {
     setMobileExpanded((prev) => ({ ...prev, [label]: !prev[label] }));
   };
 
+  // Clicking "Home" while already on "/" is a same-URL Link click — Next.js
+  // doesn't trigger a navigation or scroll reset for that, so without this it
+  // silently does nothing if the page is scrolled down.
+  const handleHomeClick = (href: string) => {
+    if (href === "/" && pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   const isLinkActive = (item: HeaderNavItem) => {
     if (pathname === item.href) return true;
     if (item.children) {
@@ -177,6 +186,7 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() => handleHomeClick(item.href)}
                 className={`relative rounded-full px-3.5 py-2 text-[0.88rem] font-medium transition-all duration-200 ${
                   active
                     ? "text-primary font-semibold"
@@ -265,7 +275,10 @@ export function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    handleHomeClick(item.href);
+                  }}
                   className={`rounded-xl px-3.5 py-3 text-base font-semibold transition-colors ${
                     active ? "bg-primary-tint text-primary" : "text-ink hover:bg-cream-deep"
                   }`}

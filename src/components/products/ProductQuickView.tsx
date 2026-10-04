@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import type { Product } from "@/data/products";
 import { Button } from "@/components/ui/Button";
+import { ProductImage } from "@/components/ui/ProductImage";
 import { CloseIcon, WhatsAppIcon, CheckIcon } from "@/components/icons";
 import { whatsappLink, productEnquiryMessage } from "@/lib/whatsapp";
 import { trackEvent } from "@/lib/analytics";
@@ -17,7 +16,7 @@ interface ProductQuickViewProps {
 export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
   useEffect(() => {
     if (!product) return;
-    trackEvent("view_item", { item_name: product.name, item_category: product.category });
+    trackEvent("view_item", { item_name: product.name, item_category: product.categories[0] });
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
@@ -57,10 +56,8 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
         <div className="grid gap-6 md:grid-cols-2">
           {/* Product Image */}
           <div className="relative aspect-[4/3] w-full overflow-hidden bg-cream-deep md:aspect-auto md:h-full">
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
+            <ProductImage
+              product={product}
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
@@ -75,7 +72,7 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
           <div className="flex flex-col gap-5 p-6 sm:p-8">
             <div>
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-                {product.category}
+                {product.categories[0]}
               </span>
               <h3 className="mt-1 font-display text-2xl font-bold text-ink sm:text-3xl">
                 {product.name}
@@ -105,17 +102,21 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
               <span className="text-xs font-semibold uppercase tracking-wider text-ink-faint">
                 Available Packaging:
               </span>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {product.packaging.map((pack) => (
-                  <span
-                    key={pack}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary-tint px-3 py-1 text-xs font-medium text-primary"
-                  >
-                    <CheckIcon className="h-3 w-3 text-primary" />
-                    {pack}
-                  </span>
-                ))}
-              </div>
+              {product.packaging.length ? (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {product.packaging.map((pack) => (
+                    <span
+                      key={pack}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary-tint px-3 py-1 text-xs font-medium text-primary"
+                    >
+                      <CheckIcon className="h-3 w-3 text-primary" />
+                      {pack}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <p className="mt-1.5 text-xs text-ink-soft">Packaging Details Coming Soon</p>
+              )}
             </div>
 
             {/* CTA Buttons */}

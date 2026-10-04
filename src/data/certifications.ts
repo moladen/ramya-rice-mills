@@ -1,35 +1,19 @@
-// IMPORTANT: Do not assume Ramya Rice Mills LLP holds any certification.
-// Every entry here is an unverified placeholder slot for common industry
-// certifications — swap in the confirmed name, logo, and document once the
-// client provides it, and remove any slot that doesn't apply.
+// IMPORTANT: Do not assume or imply Ramya Rice Mills LLP holds any specific
+// certification or registration. These are generic, industry-relevant
+// documentation categories for a rice manufacturing and export business —
+// not a claim that any one of them is currently held. Replace with the
+// client's actual verified certificate details (name, number, validity) once
+// confirmed, and remove any category that doesn't apply.
 
-export type CertificationSlot = {
+export type CertificationCategory = {
   key: string;
-  suggestedName: string;
+  name: string;
   description: string;
-  status: "pending";
 };
 
-export const CERTIFICATION_SLOTS: CertificationSlot[] = [
-  {
-    key: "cert-1",
-    suggestedName: "Certification Name (Pending)",
-    description:
-      "e.g. FSSAI license. Awaiting confirmation and documentation from Ramya Rice.",
-    status: "pending",
-  },
-  {
-    key: "cert-2",
-    suggestedName: "Certification Name (Pending)",
-    description:
-      "e.g. ISO certification. Awaiting confirmation and documentation from Ramya Rice.",
-    status: "pending",
-  },
-  {
-    key: "cert-3",
-    suggestedName: "Certification Name (Pending)",
-    description:
-      "e.g. APEDA registration. Awaiting confirmation and documentation from Ramya Rice.",
-    status: "pending",
-  },
+export const CERTIFICATION_CATEGORIES: CertificationCategory[] = [
+  { key: "fssai", name: "FSSAI", description: "Food safety licensing for food business operators in India." },
+  { key: "apeda", name: "APEDA", description: "Registration relevant to the export of agricultural and processed food products from India." },
+  { key: "iec", name: "IEC", description: "Import Export Code, required to conduct cross-border trade from India." },
+  { key: "iso", name: "ISO", description: "International standards relevant to quality and food safety management." },
 ];

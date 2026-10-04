@@ -4,18 +4,18 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Visual } from "@/components/ui/Visual";
 import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/ui/CTASection";
-import { CheckIcon, StoreIcon, CartIcon, ChefIcon, BoxesIcon, GlobeIcon, TagIcon, ChevronRightIcon } from "@/components/icons";
+import { CheckIcon, StoreIcon, CartIcon, ChefIcon, BoxesIcon, GlobeIcon, TagIcon, MonitorIcon, ChevronRightIcon } from "@/components/icons";
 import { BUSINESS_SOLUTIONS } from "@/data/business-solutions";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Business Solutions",
   description:
-    "B2B supply solutions from Ramya Rice: wholesale, retail, HORECA, bulk supply, export, and private label.",
+    "B2B rice supply solutions from Ramya Rice: wholesale, retail, online, HORECA, bulk and institutional, export, and private label rice supply across India.",
   path: "/business-solutions",
 });
 
-const ICONS = { store: StoreIcon, cart: CartIcon, chef: ChefIcon, boxes: BoxesIcon, globe: GlobeIcon, tag: TagIcon };
+const ICONS = { store: StoreIcon, cart: CartIcon, chef: ChefIcon, boxes: BoxesIcon, globe: GlobeIcon, tag: TagIcon, monitor: MonitorIcon };
 const TONES = ["forest", "gold", "night", "cream"] as const;
 
 // Only set a photo where a genuinely representative free-license image was

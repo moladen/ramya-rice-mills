@@ -1,16 +1,17 @@
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { FeatureCard } from "@/components/ui/FeatureCard";
+import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/ui/CTASection";
 import { ProductsExperience } from "@/components/products/ProductsExperience";
-import { GrainIcon, LeafIcon, WheatIcon, ShieldCheckIcon, GearIcon, GlobeIcon } from "@/components/icons";
+import { GrainIcon, LeafIcon, WheatIcon, ShieldCheckIcon, GearIcon, GlobeIcon, DownloadIcon } from "@/components/icons";
 import { PRODUCTS, PRODUCT_CATEGORIES } from "@/data/products";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Products",
   description:
-    "Browse Ramya Rice's rice portfolio: Basmati, Non-Basmati, and other rice varieties packed for retail, wholesale, HORECA, and export.",
+    "Browse Ramya Rice's rice portfolio: Basmati, Non-Basmati, Long-Grain, Medium-Grain, Regional Indian, Parboiled, Steam, and Raw rice for retail, wholesale, HORECA, and export.",
   path: "/products",
 });
 
@@ -71,6 +72,31 @@ export default function ProductsPage() {
       <section className="py-20 sm:py-28">
         <Container>
           <ProductsExperience products={PRODUCTS} categories={PRODUCT_CATEGORIES} />
+        </Container>
+      </section>
+
+      {/* CATALOGUE DOWNLOAD CTA — no verified PDF exists yet (see report);
+          routes to the enquiry form instead of a dead/invented file link. */}
+      <section className="py-4">
+        <Container>
+          <Reveal className="flex flex-col items-center gap-5 rounded-3xl border border-cream-line bg-surface p-8 text-center shadow-[0_24px_48px_-32px_rgba(28,26,23,0.25)] sm:flex-row sm:justify-between sm:text-left">
+            <div className="flex flex-col gap-1.5 sm:max-w-md">
+              <span className="flex items-center justify-center gap-2.5 text-xs font-semibold uppercase tracking-[0.25em] text-gold sm:justify-start">
+                <DownloadIcon className="h-4 w-4" />
+                Product Catalogue (Coming Soon)
+              </span>
+              <h2 className="font-display text-xl text-ink sm:text-2xl">
+                Download Product Catalogue / Export Specification Sheet
+              </h2>
+              <p className="text-sm leading-relaxed text-ink-soft">
+                A downloadable PDF will be available here once Ramya Rice provides the catalogue or
+                export specification sheet. Request one directly in the meantime.
+              </p>
+            </div>
+            <Button href="/contact" variant="primary" size="lg" className="w-full justify-center sm:w-fit">
+              Request Catalogue
+            </Button>
+          </Reveal>
         </Container>
       </section>
 

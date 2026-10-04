@@ -13,17 +13,17 @@ import {
 import type { ProcessStep } from "@/data/quality-process";
 
 // Presentational only — maps each existing step number to an icon already in
-// the shared icon set, by theme (Sourcing → grain, Packaging → package, …).
-// No process steps, copy, or claims are added beyond QUALITY_PROCESS_STEPS.
+// the shared icon set, by theme (Source → wheat, Pack → package, …). No
+// process steps, copy, or claims are added beyond QUALITY_PROCESS_STEPS.
 const STEP_ICONS: Record<number, ComponentType<SVGProps<SVGSVGElement>>> = {
   1: WheatIcon,
-  2: GearIcon,
+  2: TruckIcon,
   3: LeafIcon,
-  4: GrainIcon,
-  5: FlaskIcon,
-  6: PackageIcon,
-  7: ShieldCheckIcon,
-  8: TruckIcon,
+  4: GearIcon,
+  5: GrainIcon,
+  6: FlaskIcon,
+  7: PackageIcon,
+  8: ShieldCheckIcon,
 };
 
 /**

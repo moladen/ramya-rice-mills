@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ChevronRightIcon } from "@/components/icons";
 import { Button } from "@/components/ui/Button";
+import { ProductImage } from "@/components/ui/ProductImage";
 import type { Product } from "@/data/products";
 import { whatsappLink, productEnquiryMessage } from "@/lib/whatsapp";
 
@@ -24,10 +24,8 @@ export function ProductCard({
       {/* Product Image Showcase with Shimmer and Zoom */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-cream-deep">
         <Link href={`/products/${product.slug}`} className="block h-full w-full">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
+          <ProductImage
+            product={product}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           />
@@ -64,7 +62,7 @@ export function ProductCard({
       <div className="flex flex-1 flex-col gap-3.5 p-6">
         <div className="flex items-center justify-between">
           <span className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-gold">
-            {product.category}
+            {product.categories[0]}
           </span>
           <span className="flex h-2 w-2 rounded-full bg-gold/60 transition-transform duration-300 group-hover:scale-150 group-hover:bg-gold" />
         </div>
@@ -78,18 +76,6 @@ export function ProductCard({
         <p className="line-clamp-2 flex-1 text-sm leading-relaxed text-ink-soft">
           {product.shortDescription}
         </p>
-
-        {/* Key Specs Pills */}
-        <div className="flex flex-wrap gap-1.5 py-1">
-          {product.specs.slice(0, 2).map((s) => (
-            <span
-              key={s.label}
-              className="rounded-lg border border-cream-line bg-cream/70 px-2.5 py-1 text-[0.7rem] font-medium text-ink-soft"
-            >
-              <strong className="text-ink">{s.label}:</strong> {s.value}
-            </span>
-          ))}
-        </div>
 
         {/* Action Buttons */}
         <div className="mt-2 flex flex-wrap items-center gap-2.5 pt-1">

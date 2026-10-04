@@ -4,12 +4,13 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/ui/CTASection";
 import { QUALITY_PROCESS_STEPS } from "@/data/quality-process";
+import { SITE } from "@/data/site";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Quality & Process",
   description:
-    "The journey our rice follows: sourcing, processing, cleaning, grading, quality testing, packaging, final inspection, and dispatch.",
+    "Quality is a process, not a claim: the journey our rice follows from sourcing and receiving through cleaning, processing, grading, testing, packing, and dispatch.",
   path: "/quality-process",
 });
 
@@ -18,8 +19,8 @@ export default function QualityProcessPage() {
     <>
       <PageHero
         eyebrow="Quality & Process"
-        title="Every Batch Follows the Same Journey"
-        description="A consistent, repeatable process is what keeps grain quality dependable, from the first intake check to final dispatch."
+        title="Quality Is a Process, Not a Claim."
+        description="A consistent, disciplined process is what keeps grain quality dependable, from the first intake check to final dispatch."
       />
 
       <section className="py-20 sm:py-28">
@@ -27,7 +28,7 @@ export default function QualityProcessPage() {
           <Reveal>
             <SectionHeader
               eyebrow="Our Process"
-              title="Sourcing to Dispatch"
+              title="Source to Dispatch"
               align="center"
             />
           </Reveal>
@@ -67,6 +68,25 @@ export default function QualityProcessPage() {
               </Reveal>
             ))}
           </div>
+        </Container>
+      </section>
+
+      {/* Quality philosophy */}
+      <section className="bg-cream-deep py-20 sm:py-28">
+        <Container className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
+          <SectionHeader
+            eyebrow="Our Philosophy"
+            title="Discipline, Not Shortcuts"
+            align="center"
+          />
+          <p className="border-l-2 border-gold/50 pl-4 text-base font-medium italic leading-relaxed text-ink-soft">
+            &ldquo;{SITE.philosophy}&rdquo;
+          </p>
+          <p className="text-sm leading-relaxed text-ink-soft">
+            Our approach to quality is shaped by an international, process-driven outlook, including our
+            leadership&apos;s professional experience in Germany, applied to every stage of sourcing,
+            processing, and dispatch, in line with applicable Indian food safety practice.
+          </p>
         </Container>
       </section>
 

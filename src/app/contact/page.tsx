@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Contact Us",
   description:
-    "Get in touch with Ramya Rice for wholesale, retail, HORECA, bulk, or export rice enquiries.",
+    "Get in touch with Ramya Rice, a rice supplier in India, for wholesale, retail, HORECA, bulk, or export rice enquiries.",
   path: "/contact",
 });
 

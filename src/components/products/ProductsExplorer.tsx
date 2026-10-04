@@ -17,7 +17,7 @@ export function ProductsExplorer({
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
 
   const filtered = useMemo(
-    () => (active === "All" ? products : products.filter((p) => p.category === active)),
+    () => (active === "All" ? products : products.filter((p) => p.categories.includes(active))),
     [active, products]
   );
 
@@ -31,7 +31,7 @@ export function ProductsExplorer({
           const count =
             tab === "All"
               ? products.length
-              : products.filter((p) => p.category === tab).length;
+              : products.filter((p) => p.categories.includes(tab)).length;
 
           return (
             <button

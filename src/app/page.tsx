@@ -34,15 +34,15 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   description:
-    "Ramya Rice is a rice manufacturer and exporter offering premium basmati and non-basmati rice, with modern processing and dependable bulk supply for domestic and international B2B buyers.",
+    "Ramya Rice is an Indian rice manufacturer and exporter sourcing from Bundelkhand and processing on Satake technology, offering premium basmati and non-basmati rice with disciplined quality and reliable B2B supply.",
   path: "/",
 });
 
 const HERO_CAPABILITIES = [
-  "Consistent Grain Quality",
-  "Modern Processing",
+  "Bundelkhand Sourced",
+  "Satake Technology",
+  "Disciplined Quality",
   "Export Ready",
-  "Reliable Supply",
 ];
 
 const WHY_RAMYA_RICE = [
@@ -136,11 +136,19 @@ export default function Home() {
                 </h1>
               </Reveal>
 
-              <Reveal delay={220}>
-                <p className="max-w-sm text-base leading-[1.75] text-cream/70 sm:text-lg">
-                  {SITE.shortDescription}
-                </p>
-              </Reveal>
+              <div className="flex flex-col gap-3">
+                <Reveal delay={220}>
+                  <p className="max-w-sm text-base leading-[1.75] text-cream/70 sm:text-lg">
+                    {SITE.shortDescription}
+                  </p>
+                </Reveal>
+
+                <Reveal delay={270}>
+                  <p className="max-w-sm border-l-2 border-gold-light/50 pl-3 text-xs font-medium italic leading-snug text-gold-light/80 sm:text-sm">
+                    &ldquo;{SITE.philosophy}&rdquo;
+                  </p>
+                </Reveal>
+              </div>
 
               <Reveal delay={320}>
                 <div className="mt-1 flex flex-col gap-4 sm:flex-row sm:items-stretch">
@@ -213,13 +221,17 @@ export default function Home() {
               {SITE.name} builds trust <span className="text-primary">one shipment at a time.</span>
             </h2>
             <p className="max-w-md text-base leading-relaxed text-ink-soft">
-              From sourcing to dispatch, our focus stays on consistent grain quality and dependable
-              supply for domestic wholesale partners and international B2B buyers alike.
+              A modern-generation rice business with agriculture at its heart, sourcing from Bundelkhand
+              and processing on Satake technology for consistent grain quality and dependable supply.
             </p>
             <ul className="flex flex-col gap-2.5 border-t border-cream-line pt-5">
               <li className="flex items-start gap-2.5 text-sm text-ink-soft">
                 <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 Standardised processing keeps grade and grain condition consistent, order after order.
+              </li>
+              <li className="flex items-start gap-2.5 text-sm text-ink-soft">
+                <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                Led by founders with international business experience across India, the UK, and Germany.
               </li>
               <li className="flex items-start gap-2.5 text-sm text-ink-soft">
                 <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -240,10 +252,10 @@ export default function Home() {
       {/* KEY STATISTICS */}
       <section className="bg-grain bg-primary-dark py-16 sm:py-20">
         <Container>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {STATS.map((stat, i) => (
               <Reveal key={stat.label} delay={i * 80}>
-                <StatCard value={stat.value} label={stat.label} placeholder={stat.placeholder} />
+                <StatCard value={stat.value} label={stat.label} />
               </Reveal>
             ))}
           </div>
@@ -336,7 +348,7 @@ export default function Home() {
             <SectionHeader
               eyebrow="Manufacturing & Infrastructure"
               title="Inside Our Processing Facility"
-              description="A look at the capability behind every bag of rice we dispatch."
+              description="Built on Satake technology, from paddy intake through to final dispatch."
               tone="dark"
             />
             <Button href="/infrastructure" variant="outline-light" size="md" icon={<ChevronRightIcon className="h-4 w-4" />}>
@@ -402,7 +414,7 @@ export default function Home() {
             <SectionHeader
               eyebrow="Business Solutions"
               title="Built Around Your Business"
-              description="Wholesale, retail, HORECA, bulk, export and private-label supply: choose the model that fits your business."
+              description="Wholesale, retail, online, HORECA, bulk and institutional, export, and private-label supply: choose the model that fits your business."
             />
             <Button href="/business-solutions" variant="primary" size="md" className="w-fit group" icon={<ChevronRightIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />}>
               Explore Solutions

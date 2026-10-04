@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ProductCarousel } from "@/components/products/ProductCarousel";
 import { ProductQuickView } from "@/components/products/ProductQuickView";
+import { ProductsComingSoon } from "@/components/products/ProductsComingSoon";
 import type { Product, ProductCategory } from "@/data/products";
 
 export function ProductsExperience({
@@ -18,7 +19,7 @@ export function ProductsExperience({
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
 
   const filtered = useMemo(
-    () => (active === "All" ? products : products.filter((p) => p.category === active)),
+    () => (active === "All" ? products : products.filter((p) => p.categories.includes(active))),
     [active, products]
   );
 
@@ -42,7 +43,7 @@ export function ProductsExperience({
       <div className="flex flex-wrap justify-center gap-2.5">
         {tabs.map((tab) => {
           const count =
-            tab === "All" ? products.length : products.filter((p) => p.category === tab).length;
+            tab === "All" ? products.length : products.filter((p) => p.categories.includes(tab)).length;
 
           return (
             <button
@@ -77,9 +78,7 @@ export function ProductsExperience({
         {displayed.length ? (
           <ProductCarousel products={displayed} onQuickView={(p) => setQuickViewProduct(p)} />
         ) : (
-          <div className="rounded-3xl border border-dashed border-cream-line p-12 text-center text-sm text-ink-soft">
-            No products in this category yet.
-          </div>
+          <ProductsComingSoon isCustom={active === "Custom Specifications"} />
         )}
       </div>
 

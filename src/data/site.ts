@@ -8,12 +8,19 @@
 export const SITE = {
   // Primary brand name used across marketing copy, headings, and metadata —
   // per client feedback, "LLP"/"Mills" should not be emphasized outside
-  // genuinely legal/formal contexts (footer copyright, postal address).
+  // genuinely legal/formal contexts (footer copyright, postal address, SEO title).
   name: "Ramya Rice",
   legalName: "Ramya Rice Mills LLP",
   tagline: "Rooted in India, Reaching the World",
+  // Brand philosophy line, per customer-approved positioning — used verbatim
+  // across Home, About, and Quality & Process.
+  philosophy: "Respect the grain. Control the process. Deliver consistently.",
+  // Primary brand story line, per customer-approved positioning — paired with
+  // the Field → Farmers/Procurement → Processing → Satake Technology →
+  // People & Process → International Experience → World Markets journey.
+  brandStory: "Our Grain. Our Roots. Our World.",
   shortDescription:
-    "Ramya Rice is a rice manufacturing and export business focused on consistent quality, modern processing, and dependable supply for domestic and international B2B markets.",
+    "Ramya Rice is a modern Indian rice business sourcing from Bundelkhand and processing on Satake technology, for disciplined quality and reliable B2B supply.",
   contact: {
     phoneDisplay: "+91 99118 95555",
     phoneHref: "tel:+919911895555",
@@ -38,14 +45,13 @@ export const SITE = {
   },
 } as const;
 
-// IMPORTANT: these values are illustrative placeholders only, picked to fill
-// the layout (and let AnimatedCounter's count-up actually run) while real
-// figures are pending. `placeholder: true` keeps the "pending confirmation"
-// badge visible on each card — do not remove that flag, and do not let these
-// numbers ship at launch without the client confirming real figures.
+// Qualitative positioning statements, per customer feedback — deliberately
+// not numeric. Do not replace these with invented figures (years in
+// business, production tonnage, variety count, country count, etc.) unless
+// the client provides verified numbers.
 export const STATS = [
-  { value: "15+", label: "Years of Experience", placeholder: true },
-  { value: "25,000 MT", label: "Annual Production Capacity", placeholder: true },
-  { value: "12+", label: "Rice Varieties", placeholder: true },
-  { value: "18+", label: "Countries / Markets Served", placeholder: true },
+  { value: "Bundelkhand Sourced", label: "Paddy sourced from Bundelkhand" },
+  { value: "Satake Technology", label: "Modern milling & processing" },
+  { value: "Domestic & Export Markets", label: "Supply reach" },
+  { value: "B2B + Online", label: "Channels served" },
 ] as const;

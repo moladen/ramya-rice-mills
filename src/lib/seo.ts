@@ -25,7 +25,7 @@ export function buildMetadata({
   image?: string;
 }): Metadata {
   const url = `${SITE_URL}${path}`;
-  const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} | Premium Rice Manufacturer & Exporter`;
+  const fullTitle = title ? `${title} | ${SITE.name}` : "Ramya Rice Mills | Premium Indian Rice Manufacturer & Exporter";
 
   return {
     // Omit the key entirely (rather than `title: undefined`) when no title is

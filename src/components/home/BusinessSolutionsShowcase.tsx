@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ComponentType, type SVGProps } from "react";
-import { StoreIcon, CartIcon, ChefIcon, BoxesIcon, GlobeIcon, TagIcon } from "@/components/icons";
+import { StoreIcon, CartIcon, ChefIcon, BoxesIcon, GlobeIcon, TagIcon, MonitorIcon } from "@/components/icons";
 import type { BusinessSolution } from "@/data/business-solutions";
 
 // Resolved inside this client component rather than accepted as a prop —
@@ -15,6 +15,7 @@ const SOLUTION_ICONS: Record<BusinessSolution["icon"], ComponentType<SVGProps<SV
   boxes: BoxesIcon,
   globe: GlobeIcon,
   tag: TagIcon,
+  monitor: MonitorIcon,
 };
 
 /**

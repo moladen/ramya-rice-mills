@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent, type TouchEvent } from "react";
-import Image from "next/image";
 import type { Product } from "@/data/products";
 import { Button } from "@/components/ui/Button";
+import { ProductImage } from "@/components/ui/ProductImage";
 import { ChevronRightIcon, ShieldCheckIcon, WhatsAppIcon } from "@/components/icons";
 import { whatsappLink, productEnquiryMessage } from "@/lib/whatsapp";
 
@@ -126,10 +126,8 @@ export function ProductCarousel({
                       : "cursor-pointer border border-cream-line shadow-lg hover:shadow-xl"
                   }`}
                 >
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
+                  <ProductImage
+                    product={product}
                     sizes="(max-width: 1024px) 60vw, 22vw"
                     priority={isCenter}
                     className={`object-cover transition-transform duration-700 ${isCenter ? "hover:scale-105" : ""}`}
@@ -178,7 +176,7 @@ export function ProductCarousel({
       {/* Center product details — crossfades whenever the centered card changes */}
       <div key={center.slug} className="animate-fade-up flex max-w-xl flex-col items-center gap-3 text-center">
         <span className="inline-flex items-center rounded-full bg-primary-tint px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-wide text-primary">
-          {center.category}
+          {center.categories[0]}
         </span>
         <h3 className="font-display text-2xl font-semibold text-ink sm:text-3xl">{center.name}</h3>
         <p className="text-sm leading-relaxed text-ink-soft sm:text-base">{center.shortDescription}</p>

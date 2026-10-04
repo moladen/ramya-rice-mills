@@ -18,7 +18,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 
-const DEFAULT_TITLE = `${SITE.name} | Premium Rice Manufacturer & Exporter`;
+// Customer-suggested SEO title for the homepage/default — subpages keep the
+// shorter "Ramya Rice" brand name via the title template below, per the
+// client's own guidance not to over-emphasize "Mills"/"LLP" outside formal
+// contexts (this title is the one deliberate exception, as requested).
+const DEFAULT_TITLE = "Ramya Rice Mills | Premium Indian Rice Manufacturer & Exporter";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

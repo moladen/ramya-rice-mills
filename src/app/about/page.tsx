@@ -12,13 +12,19 @@ import {
   GearIcon,
   GlobeIcon,
   TruckIcon,
+  WheatIcon,
+  CheckIcon,
+  MapPinIcon,
+  ChevronRightIcon,
 } from "@/components/icons";
+import { SITE } from "@/data/site";
+import { LEADERSHIP } from "@/data/leadership";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "About Us",
   description:
-    "Learn about Ramya Rice: our story, vision, mission, and the values behind our rice manufacturing and export business.",
+    "Ramya Rice is a modern-generation Indian rice manufacturer rooted in agriculture, sourcing from Bundelkhand and processing on Satake technology, led by a team with international business experience.",
   path: "/about",
 });
 
@@ -30,9 +36,21 @@ const VALUES = [
 ];
 
 const STRENGTHS = [
-  { icon: FactoryIcon, title: "Manufacturing Capability", description: "A dedicated facility covering cleaning, milling, and packaging." },
+  { icon: FactoryIcon, title: "Manufacturing Capability", description: "A dedicated facility built on Satake technology, covering cleaning, milling, and packaging." },
   { icon: TruckIcon, title: "Supply Reliability", description: "Production planned around dependable, repeatable dispatch schedules." },
-  { icon: GlobeIcon, title: "B2B & Export Ready", description: "Structured to serve wholesale, HORECA, bulk, and export buyers." },
+  { icon: GlobeIcon, title: "B2B & Export Ready", description: "Structured to serve wholesale, HORECA, bulk, and export buyers, backed by international business experience." },
+];
+
+// The brand story journey, per customer-approved positioning — presentational
+// chips only, no claims beyond the sequence itself.
+const BRAND_JOURNEY = [
+  { icon: LeafIcon, label: "Field" },
+  { icon: WheatIcon, label: "Farmers / Procurement" },
+  { icon: GearIcon, label: "Processing" },
+  { icon: FactoryIcon, label: "Satake Technology" },
+  { icon: CheckIcon, label: "People & Process" },
+  { icon: MapPinIcon, label: "International Experience" },
+  { icon: GlobeIcon, label: "World Markets" },
 ];
 
 export default function AboutPage() {
@@ -40,8 +58,8 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About Us"
-        title="A Rice Manufacturing Business Built on Trust"
-        description="Get to know Ramya Rice: our story, our purpose, and the principles that guide how we work with partners."
+        title="A Modern-Generation Rice Business, Rooted in Agriculture"
+        description="Ramya Rice is built on Indian agricultural roots, Bundelkhand sourcing, and Satake processing technology, led by a team with international business experience and global ambition."
       />
 
       {/* Introduction */}
@@ -51,7 +69,7 @@ export default function AboutPage() {
             <SectionHeader
               eyebrow="Company Introduction"
               title="Who We Are"
-              description="Ramya Rice is a rice manufacturing and export business focused on consistent grain quality, dependable supply, and long-term B2B partnerships. This section will carry the client's full company introduction once confirmed."
+              description="Ramya Rice is a modern-generation rice manufacturing and export business with agriculture at its heart. We source paddy from Bundelkhand and process it on Satake technology, applying an international, quality-first approach to every order."
             />
           </Reveal>
           <Reveal delay={100}>
@@ -65,7 +83,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* Story / History */}
+      {/* Brand Story */}
       <section className="bg-cream-deep py-20 sm:py-28">
         <Container className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
           <Reveal className="order-2 lg:order-1">
@@ -79,10 +97,29 @@ export default function AboutPage() {
           <Reveal delay={100} className="order-1 flex flex-col gap-5 lg:order-2">
             <SectionHeader
               eyebrow="Our Story"
-              title="Company History"
+              title={SITE.brandStory}
               description="Ramya Rice has grown by staying focused on consistent grain quality, modern processing, and dependable supply for partners across domestic and export markets."
             />
+            <p className="border-l-2 border-gold/50 pl-4 text-sm font-medium italic leading-relaxed text-ink-soft">
+              &ldquo;{SITE.philosophy}&rdquo;
+            </p>
           </Reveal>
+        </Container>
+
+        <Container className="mt-14">
+          <div role="list" aria-label="Our journey, from field to world markets" className="flex flex-wrap items-center justify-center gap-x-2 gap-y-4">
+            {BRAND_JOURNEY.map((step, i) => (
+              <div key={step.label} role="listitem" className="flex items-center gap-2">
+                <span className="flex items-center gap-1.5 rounded-full border border-gold/30 bg-surface px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-ink-soft sm:text-sm">
+                  <step.icon className="h-4 w-4 text-gold" strokeWidth={1.6} aria-hidden="true" />
+                  {step.label}
+                </span>
+                {i < BRAND_JOURNEY.length - 1 ? (
+                  <ChevronRightIcon className="h-3.5 w-3.5 text-gold/40" aria-hidden="true" />
+                ) : null}
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
 
@@ -136,19 +173,50 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* Achievements & Leadership */}
+      {/* Leadership */}
       <section className="bg-cream-deep py-20 sm:py-28">
-        <Container className="grid gap-8 sm:grid-cols-2">
-          <Reveal className="flex flex-col gap-3 rounded-3xl border border-dashed border-cream-line bg-surface p-10">
+        <Container className="flex flex-col gap-12">
+          <Reveal>
+            <SectionHeader
+              eyebrow="Leadership"
+              title="Founders Driving Ramya Rice"
+              description="Led by founders who bring together agricultural roots and international business experience."
+              align="center"
+            />
+          </Reveal>
+          <div className="grid gap-8 sm:grid-cols-2">
+            {LEADERSHIP.map((person, i) => (
+              <Reveal key={person.key} delay={i * 90}>
+                <div className="flex h-full flex-col gap-5 rounded-3xl border border-cream-line bg-surface p-8 sm:p-10">
+                  <div className="flex flex-col gap-1.5">
+                    <h3 className="font-display text-2xl text-ink">{person.name}</h3>
+                    <span className="text-sm font-semibold text-primary">{person.title}</span>
+                  </div>
+                  <span className="inline-flex w-fit items-center rounded-full bg-primary-tint px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+                    {person.qualification}
+                  </span>
+                  <ul className="flex flex-col gap-2.5 border-t border-cream-line pt-4">
+                    {person.highlights.map((highlight) => (
+                      <li key={highlight} className="flex items-start gap-2.5 text-sm text-ink-soft">
+                        <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Achievements */}
+      <section className="py-20 sm:py-28">
+        <Container>
+          <Reveal className="mx-auto flex max-w-xl flex-col gap-3 rounded-3xl border border-dashed border-cream-line bg-surface p-10 text-center">
             <h3 className="font-display text-xl text-ink">Achievements</h3>
             <p className="text-sm leading-relaxed text-ink-soft">
               Awards, milestones, and recognitions will be listed here once shared by Ramya Rice.
-            </p>
-          </Reveal>
-          <Reveal delay={90} className="flex flex-col gap-3 rounded-3xl border border-dashed border-cream-line bg-surface p-10">
-            <h3 className="font-display text-xl text-ink">Leadership</h3>
-            <p className="text-sm leading-relaxed text-ink-soft">
-              Leadership profiles and company information will be added here once confirmed by the client.
             </p>
           </Reveal>
         </Container>

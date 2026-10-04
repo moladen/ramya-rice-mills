@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useRef, useState, type KeyboardEvent, type TouchEvent } from "react";
-import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { ProductImage } from "@/components/ui/ProductImage";
+import { ProductsComingSoon } from "@/components/products/ProductsComingSoon";
 import { ChevronRightIcon } from "@/components/icons";
 import { whatsappLink, productEnquiryMessage } from "@/lib/whatsapp";
 import type { Product, ProductCategory } from "@/data/products";
@@ -31,7 +32,7 @@ export function ProductShowcase({
   const touchStartX = useRef<number | null>(null);
 
   const filtered = useMemo(
-    () => (active === "All" ? products : products.filter((p) => p.category === active)),
+    () => (active === "All" ? products : products.filter((p) => p.categories.includes(active))),
     [active, products]
   );
 
@@ -97,9 +98,7 @@ export function ProductShowcase({
       </div>
 
       {!current ? (
-        <div className="rounded-3xl border border-dashed border-cream-line p-12 text-center text-sm text-ink-soft">
-          No products in this category yet.
-        </div>
+        <ProductsComingSoon isCustom={active === "Custom Specifications"} />
       ) : (
         <>
           {/* Carousel */}
@@ -123,10 +122,8 @@ export function ProductShowcase({
                   aria-label={`Previous product: ${prevProduct.name}`}
                   className="group relative hidden h-40 w-32 shrink-0 overflow-hidden rounded-2xl opacity-70 shadow-md ring-1 ring-cream-line transition-all duration-500 hover:opacity-95 focus-visible:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:block lg:h-48 lg:w-36"
                 >
-                  <Image
-                    src={prevProduct.image}
-                    alt=""
-                    fill
+                  <ProductImage
+                    product={prevProduct}
                     sizes="150px"
                     className="object-cover blur-[1px] transition-[filter] duration-500 group-hover:blur-0"
                   />
@@ -142,10 +139,8 @@ export function ProductShowcase({
                 style={slideStyle}
                 className="animate-slide-fade-in relative h-80 w-full max-w-[21rem] shrink-0 overflow-hidden rounded-3xl shadow-[0_32px_64px_-20px_rgba(7,38,19,0.3)] sm:h-96 sm:max-w-md lg:h-[30rem] lg:max-w-lg"
               >
-                <Image
-                  src={current.image}
-                  alt={current.name}
-                  fill
+                <ProductImage
+                  product={current}
                   priority
                   sizes="(max-width: 1024px) 90vw, 30vw"
                   className="object-cover transition-transform duration-700 ease-out hover:scale-105"
@@ -166,10 +161,8 @@ export function ProductShowcase({
                   aria-label={`Next product: ${nextProduct.name}`}
                   className="group relative hidden h-40 w-32 shrink-0 overflow-hidden rounded-2xl opacity-70 shadow-md ring-1 ring-cream-line transition-all duration-500 hover:opacity-95 focus-visible:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:block lg:h-48 lg:w-36"
                 >
-                  <Image
-                    src={nextProduct.image}
-                    alt=""
-                    fill
+                  <ProductImage
+                    product={nextProduct}
                     sizes="150px"
                     className="object-cover blur-[1px] transition-[filter] duration-500 group-hover:blur-0"
                   />
@@ -209,23 +202,10 @@ export function ProductShowcase({
             className="animate-slide-fade-in mx-auto flex max-w-xl flex-col items-center gap-3 text-center"
           >
             <span className="inline-flex items-center rounded-full bg-primary-tint px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-wide text-primary">
-              {current.category}
+              {current.categories[0]}
             </span>
             <h3 className="font-display text-2xl font-semibold text-ink sm:text-3xl">{current.name}</h3>
             <p className="text-sm leading-relaxed text-ink-soft sm:text-base">{current.shortDescription}</p>
-
-            {current.specs.length ? (
-              <div className="flex flex-wrap justify-center gap-2 pt-1">
-                {current.specs.slice(0, 3).map((spec) => (
-                  <span
-                    key={spec.label}
-                    className="rounded-lg border border-cream-line bg-cream/70 px-2.5 py-1 text-xs font-medium text-ink-soft"
-                  >
-                    <strong className="text-ink">{spec.label}:</strong> {spec.value}
-                  </span>
-                ))}
-              </div>
-            ) : null}
 
             <div className="mt-2 flex w-full flex-col gap-2.5 sm:w-auto sm:flex-row">
               <Button

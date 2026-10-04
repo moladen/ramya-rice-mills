@@ -3,15 +3,16 @@ import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Visual } from "@/components/ui/Visual";
+import { ProcessTimeline } from "@/components/ui/ProcessTimeline";
 import { CTASection } from "@/components/ui/CTASection";
 import { FactoryIcon, GearIcon, WarehouseIcon, PackageIcon, FlaskIcon, TruckIcon } from "@/components/icons";
-import { INFRASTRUCTURE_AREAS } from "@/data/infrastructure";
+import { INFRASTRUCTURE_AREAS, MANUFACTURING_PROCESS_STEPS } from "@/data/infrastructure";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Infrastructure",
   description:
-    "A look at Ramya Rice's manufacturing facility, machinery, storage, and packaging capability.",
+    "Inside Ramya Rice's manufacturing facility: Satake milling technology and a 12-step process from paddy intake to dispatch.",
   path: "/infrastructure",
 });
 
@@ -34,10 +35,26 @@ export default function InfrastructurePage() {
       <PageHero
         eyebrow="Infrastructure"
         title="Inside Our Manufacturing Capability"
-        description="From intake to dispatch, our facility is organised around consistent processing and reliable output."
+        description="Built on Satake technology, our facility is organised around a disciplined, 12-step process from paddy intake to dispatch."
       />
 
+      {/* 12-step manufacturing process */}
       <section className="py-20 sm:py-28">
+        <Container className="flex flex-col gap-16">
+          <Reveal>
+            <SectionHeader
+              eyebrow="Our Process"
+              title="Paddy Intake to Dispatch"
+              description="Every batch moves through the same disciplined sequence, on Satake milling technology."
+              align="center"
+            />
+          </Reveal>
+          <ProcessTimeline steps={MANUFACTURING_PROCESS_STEPS} />
+        </Container>
+      </section>
+
+      {/* Facility capability overview */}
+      <section className="bg-cream-deep py-20 sm:py-28">
         <Container className="flex flex-col gap-16">
           {INFRASTRUCTURE_AREAS.map((area, i) => {
             const Icon = ICONS[area.icon];

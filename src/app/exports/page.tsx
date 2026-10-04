@@ -4,14 +4,16 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Visual } from "@/components/ui/Visual";
 import { FeatureCard } from "@/components/ui/FeatureCard";
+import { ProcessTimeline } from "@/components/ui/ProcessTimeline";
 import { CTASection } from "@/components/ui/CTASection";
-import { GlobeIcon, PackageIcon, TruckIcon, ShieldCheckIcon } from "@/components/icons";
+import { GlobeIcon, PackageIcon, TruckIcon, ShieldCheckIcon, MapPinIcon } from "@/components/icons";
+import { EXPORT_REGIONS, EXPORT_PROCESS_STEPS } from "@/data/exports";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Exports / Global Presence",
   description:
-    "Ramya Rice's export capability and approach to logistics for international B2B rice buyers.",
+    "From the heart of India to global markets: Ramya Rice is an Indian rice exporter serving B2B buyers across Asia, the Middle East, Africa, Europe, and North America.",
   path: "/exports",
 });
 
@@ -26,8 +28,8 @@ export default function ExportsPage() {
     <>
       <PageHero
         eyebrow="Exports / Global Presence"
-        title="Built to Serve International B2B Buyers"
-        description="Our export approach is designed around reliable packaging, documentation, and logistics coordination for overseas partners."
+        title="From the Heart of India to Global Markets"
+        description="Indian origin, modern processing, and a quality-first approach, backed by flexible supply and professional, responsive communication for international B2B buyers."
       />
 
       <section className="py-20 sm:py-28">
@@ -65,20 +67,42 @@ export default function ExportsPage() {
         </Container>
       </section>
 
+      {/* Export journey */}
+      <section className="py-20 sm:py-28">
+        <Container className="flex flex-col gap-16">
+          <Reveal>
+            <SectionHeader
+              eyebrow="Export Journey"
+              title="Requirement to Shipment"
+              align="center"
+            />
+          </Reveal>
+          <ProcessTimeline steps={EXPORT_PROCESS_STEPS} />
+        </Container>
+      </section>
+
       <section className="bg-grain relative overflow-hidden bg-primary-dark py-20 sm:py-28">
         <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_15%_25%,rgba(227,190,132,0.4)_1px,transparent_1px),radial-gradient(circle_at_50%_70%,rgba(227,190,132,0.3)_1px,transparent_1px),radial-gradient(circle_at_80%_35%,rgba(227,190,132,0.35)_1px,transparent_1px),radial-gradient(circle_at_35%_50%,rgba(227,190,132,0.25)_1px,transparent_1px)] [background-size:100px_100px]" />
-        <Container className="relative z-[2] flex flex-col items-center gap-8 text-center">
+        <Container className="relative z-[2] flex flex-col items-center gap-10 text-center">
           <Reveal className="flex flex-col items-center gap-5">
             <SectionHeader
-              eyebrow="Countries & Regions Served"
+              eyebrow="Regions Served"
               title="Global Presence"
-              description="A detailed list of countries and regions we serve will be published here once confirmed."
+              description="We serve international B2B buyers across the following regions."
               align="center"
               tone="dark"
             />
           </Reveal>
-          <Reveal delay={100} className="w-full max-w-2xl">
-            <Visual icon={GlobeIcon} tone="night" ratio="aspect-[16/9]" iconSize="h-16 w-16" label="World Map" />
+          <Reveal delay={100} className="flex w-full max-w-3xl flex-wrap items-center justify-center gap-3">
+            {EXPORT_REGIONS.map((region) => (
+              <span
+                key={region}
+                className="flex items-center gap-2 rounded-full border border-gold/30 bg-white/5 px-4 py-2.5 text-sm font-medium text-cream/90"
+              >
+                <MapPinIcon className="h-4 w-4 text-gold-light" strokeWidth={1.6} aria-hidden="true" />
+                {region}
+              </span>
+            ))}
           </Reveal>
         </Container>
       </section>

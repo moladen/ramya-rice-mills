@@ -20,13 +20,15 @@ type Params = Promise<{ slug: string }>;
 
 // Uses only fields already on the product record — no price, availability,
 // rating, review, or SKU, since none of that is verified client data yet.
+// `image` is omitted entirely (rather than pointing at a blank/wrong URL)
+// when no real product photo exists yet.
 function buildProductJsonLd(product: Product) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     description: product.shortDescription,
-    image: `${SITE_URL}${product.image}`,
+    ...(product.image ? { image: `${SITE_URL}${product.image}` } : {}),
     url: `${SITE_URL}/products/${product.slug}`,
     brand: { "@type": "Brand", name: SITE.name },
   };
@@ -56,7 +58,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: product.name,
     description: product.shortDescription,
     path: `/products/${product.slug}`,
-    image: product.image,
+    // Falls back to buildMetadata's own default OG image when no real photo
+    // exists yet — an empty string would otherwise override that default.
+    ...(product.image ? { image: product.image } : {}),
   });
 }
 
@@ -66,7 +70,9 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
   if (!product) notFound();
 
   const Icon = ICONS[product.icon];
-  const related = PRODUCTS.filter((p) => p.slug !== product.slug && p.category === product.category).slice(0, 3);
+  const related = PRODUCTS.filter(
+    (p) => p.slug !== product.slug && p.categories.some((c) => product.categories.includes(c))
+  ).slice(0, 3);
 
   return (
     <>
@@ -94,8 +100,9 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
             <Visual
               icon={Icon}
               ratio="aspect-square"
-              photo={product.image}
+              photo={product.image || undefined}
               alt={`${product.name} grains`}
+              label="Product Image Coming Soon"
               priority
             />
           </Reveal>
@@ -103,7 +110,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
             <div className="flex flex-col gap-3">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
-                  {product.category}
+                  {product.categories[0]}
                 </span>
                 {product.badge ? (
                   <span className="rounded-full border border-gold/40 bg-primary-tint px-3 py-0.5 text-xs font-semibold text-primary">
@@ -112,7 +119,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                 ) : null}
               </div>
               <h1 className="font-display text-3xl text-ink sm:text-4xl">{product.name}</h1>
-              {product.placeholder ? <Badge tone="pending">Sample product: confirm details before launch</Badge> : null}
+              {product.placeholder ? <Badge tone="pending">Product Details Coming Soon</Badge> : null}
               <p className="text-base leading-relaxed text-ink-soft">{product.description}</p>
             </div>
 
@@ -127,13 +134,17 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
             <div className="flex flex-col gap-3">
               <h2 className="text-sm font-semibold uppercase tracking-wide text-ink">Packaging Options</h2>
-              <div className="flex flex-wrap gap-2">
-                {product.packaging.map((p) => (
-                  <span key={p} className="rounded-full bg-primary-tint px-3 py-1 text-xs font-medium text-primary">
-                    {p}
-                  </span>
-                ))}
-              </div>
+              {product.packaging.length ? (
+                <div className="flex flex-wrap gap-2">
+                  {product.packaging.map((p) => (
+                    <span key={p} className="rounded-full bg-primary-tint px-3 py-1 text-xs font-medium text-primary">
+                      {p}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-ink-soft">Packaging Details Coming Soon</p>
+              )}
             </div>
 
             <div className="flex flex-col gap-3">
@@ -171,7 +182,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
       {related.length ? (
         <section className="bg-cream-deep py-20 sm:py-24">
           <Container className="flex flex-col gap-10">
-            <h2 className="font-display text-2xl text-ink">More from {product.category}</h2>
+            <h2 className="font-display text-2xl text-ink">More from {product.categories[0]}</h2>
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((p, i) => (
                 <Reveal key={p.slug} delay={(i % 3) * 130} className="h-full product-pop">

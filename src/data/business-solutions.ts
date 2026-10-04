@@ -1,7 +1,7 @@
 export type BusinessSolution = {
   key: string;
   name: string;
-  icon: "store" | "cart" | "chef" | "boxes" | "globe" | "tag";
+  icon: "store" | "cart" | "chef" | "boxes" | "globe" | "tag" | "monitor";
   summary: string;
   points: string[];
 };
@@ -9,7 +9,7 @@ export type BusinessSolution = {
 export const BUSINESS_SOLUTIONS: BusinessSolution[] = [
   {
     key: "wholesale",
-    name: "Wholesale Supply",
+    name: "Wholesale & Distribution",
     icon: "store",
     summary:
       "Consistent, grade-wise rice supply for wholesale distributors and regional traders.",
@@ -21,14 +21,26 @@ export const BUSINESS_SOLUTIONS: BusinessSolution[] = [
   },
   {
     key: "retail",
-    name: "Retail Supply",
+    name: "Retail & Modern Trade",
     icon: "cart",
     summary:
-      "Packaged rice ready for retail shelves, sized for everyday household purchase.",
+      "Packaged rice ready for retail shelves and modern trade, sized for everyday household purchase.",
     points: [
       "Shelf-ready pack sizes",
       "Consistent grain quality across batches",
       "Packaging options suited to modern trade",
+    ],
+  },
+  {
+    key: "online",
+    name: "Online & E-Commerce",
+    icon: "monitor",
+    summary:
+      "Packaged rice suited to online and e-commerce fulfilment, for brands and marketplaces selling direct to consumers.",
+    points: [
+      "Pack sizes suited to e-commerce shipping",
+      "Consistent grain quality across batches",
+      "Coordination for recurring online order volumes",
     ],
   },
   {
@@ -45,7 +57,7 @@ export const BUSINESS_SOLUTIONS: BusinessSolution[] = [
   },
   {
     key: "bulk-supply",
-    name: "Bulk Supply",
+    name: "Bulk & Institutional Supply",
     icon: "boxes",
     summary: "Large-volume rice supply for institutional buyers and processors.",
     points: [
