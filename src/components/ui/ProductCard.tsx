@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronRightIcon } from "@/components/icons";
+import { ChevronRightIcon, WhatsAppIcon } from "@/components/icons";
 import { Button } from "@/components/ui/Button";
 import { ProductImage } from "@/components/ui/ProductImage";
 import type { Product } from "@/data/products";
@@ -9,63 +9,45 @@ import { whatsappLink, productEnquiryMessage } from "@/lib/whatsapp";
 
 export function ProductCard({
   product,
-  index = 0,
+  compact = false,
   onQuickView,
 }: {
   product: Product;
-  index?: number;
+  compact?: boolean;
   onQuickView?: (product: Product) => void;
 }) {
   return (
-    <div
-      className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-cream-line bg-surface transition-all duration-500 hover:-translate-y-2 hover:border-gold/60 hover:shadow-[0_28px_56px_-16px_rgba(7,38,19,0.3)]"
-      style={{ animationDelay: `${index * 80}ms` }}
-    >
-      {/* Product Image Showcase with Shimmer and Zoom */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-cream-deep">
-        <Link href={`/products/${product.slug}`} className="block h-full w-full">
+    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-cream-line bg-surface transition-all duration-500 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_24px_48px_-20px_rgba(7,38,19,0.28)]">
+      <div className={`relative w-full overflow-hidden bg-cream-deep ${compact ? "aspect-[16/10]" : "aspect-[4/3]"}`}>
+        <Link href={`/products/${product.slug}`} className="block h-full w-full" aria-label={product.name}>
           <ProductImage
             product={product}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 440px"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         </Link>
 
-        {/* Diagonal Light Sweep / Shimmer Effect */}
-        <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full" />
-
-        {/* Gradient shadow for text contrast */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
-
-        {/* Top Badge */}
         {product.badge ? (
-          <div className="absolute left-4 top-4 z-10">
-            <span className="inline-flex items-center rounded-full border border-gold/40 bg-primary-dark/85 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-wider text-gold-light backdrop-blur-md transition-transform duration-300 group-hover:scale-105">
-              {product.badge}
-            </span>
-          </div>
+          <span className="absolute left-4 top-4 z-10 rounded-full border border-gold/40 bg-primary-dark/85 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-wider text-gold-light backdrop-blur-md">
+            {product.badge}
+          </span>
         ) : null}
 
-        {/* Quick View Button overlay on hover */}
         {onQuickView ? (
           <button
             type="button"
             onClick={() => onQuickView(product)}
-            className="absolute bottom-4 right-4 z-10 flex translate-y-2 items-center gap-1.5 rounded-full border border-white/40 bg-surface/90 px-3.5 py-1.5 text-xs font-semibold text-ink opacity-0 backdrop-blur-md shadow-md transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-gold hover:text-primary-dark"
+            className="absolute bottom-4 right-4 z-10 rounded-full border border-white/40 bg-surface/90 px-3.5 py-1.5 text-xs font-semibold text-ink opacity-0 shadow-md backdrop-blur-md transition-all duration-300 group-hover:opacity-100 hover:bg-gold hover:text-primary-dark focus-visible:opacity-100"
           >
             Quick View
           </button>
         ) : null}
       </div>
 
-      {/* Content */}
-      <div className="flex flex-1 flex-col gap-3.5 p-6">
-        <div className="flex items-center justify-between">
-          <span className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-gold">
-            {product.categories[0]}
-          </span>
-          <span className="flex h-2 w-2 rounded-full bg-gold/60 transition-transform duration-300 group-hover:scale-150 group-hover:bg-gold" />
-        </div>
+      <div className={`flex flex-1 flex-col p-6 ${compact ? "gap-2.5 p-5" : "gap-3"}`}>
+        <span className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-gold">
+          {product.categories[0]}
+        </span>
 
         <Link href={`/products/${product.slug}`}>
           <h3 className="font-display text-xl text-ink transition-colors group-hover:text-primary">
@@ -73,20 +55,25 @@ export function ProductCard({
           </h3>
         </Link>
 
-        <p className="line-clamp-2 flex-1 text-sm leading-relaxed text-ink-soft">
-          {product.shortDescription}
-        </p>
+        {compact ? null : (
+          <>
+            <p className="line-clamp-2 text-sm leading-relaxed text-ink-soft">{product.shortDescription}</p>
 
-        {/* Action Buttons */}
-        <div className="mt-2 flex flex-wrap items-center gap-2.5 pt-1">
+            <p className="mt-auto border-t border-cream-line pt-4 text-xs text-ink-soft">
+              Specifications &amp; packaging: <span className="font-semibold text-ink-faint">Coming Soon</span>
+            </p>
+          </>
+        )}
+
+        <div className={`flex gap-2.5 ${compact ? "mt-auto pt-1" : ""}`}>
           <Button
             href={`/products/${product.slug}`}
             variant="outline"
             size="md"
-            className="flex-1 justify-center group-hover:border-primary group-hover:bg-primary group-hover:text-cream"
+            className="flex-1 justify-center"
             icon={<ChevronRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />}
           >
-            Details
+            View Details
           </Button>
           <Button
             href={whatsappLink(productEnquiryMessage(product.name))}
@@ -95,12 +82,12 @@ export function ProductCard({
             variant="primary"
             size="md"
             className="flex-1 justify-center"
+            icon={<WhatsAppIcon className="h-4 w-4" />}
           >
             Enquire
           </Button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
-

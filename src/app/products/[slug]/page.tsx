@@ -2,15 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { Visual } from "@/components/ui/Visual";
 import { Badge } from "@/components/ui/Badge";
 import { CTASection } from "@/components/ui/CTASection";
-import { ProductCard } from "@/components/ui/ProductCard";
-import { GrainIcon, LeafIcon, WheatIcon, ChevronRightIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
+import { ProductEnquiryForm } from "@/components/products/ProductEnquiryForm";
+import { GrainIcon, LeafIcon, WheatIcon, ChevronRightIcon, CheckIcon, ArrowUpRightIcon } from "@/components/icons";
 import { PRODUCTS, getProductBySlug, type Product } from "@/data/products";
-import { whatsappLink, productEnquiryMessage } from "@/lib/whatsapp";
 import { buildMetadata, SITE_URL } from "@/lib/seo";
 import { SITE } from "@/data/site";
 
@@ -70,9 +68,10 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
   if (!product) notFound();
 
   const Icon = ICONS[product.icon];
-  const related = PRODUCTS.filter(
-    (p) => p.slug !== product.slug && p.categories.some((c) => product.categories.includes(c))
-  ).slice(0, 3);
+  const sharesCategory = (p: Product) => p.categories.some((c) => product.categories.includes(c));
+  const others = PRODUCTS.filter((p) => p.slug !== product.slug).sort(
+    (a, b) => Number(sharesCategory(b)) - Number(sharesCategory(a))
+  );
 
   return (
     <>
@@ -84,9 +83,12 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd(product)) }}
       />
+
       <section className="border-b border-cream-line bg-cream-deep py-6">
         <Container>
-          <nav className="flex items-center gap-2 text-xs text-ink-soft">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-ink-soft">
+            <Link href="/" className="hover:text-primary">Home</Link>
+            <ChevronRightIcon className="h-3.5 w-3.5" />
             <Link href="/products" className="hover:text-primary">Products</Link>
             <ChevronRightIcon className="h-3.5 w-3.5" />
             <span className="text-ink">{product.name}</span>
@@ -94,46 +96,94 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
         </Container>
       </section>
 
-      <section className="py-16 sm:py-24">
-        <Container className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <section className="py-14 sm:py-20">
+        <Container className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
           <Reveal>
-            <Visual
-              icon={Icon}
-              ratio="aspect-square"
-              photo={product.image || undefined}
-              alt={`${product.name} grains`}
-              label="Product Image Coming Soon"
-              priority
-            />
+            <div className="flex flex-col gap-6 lg:sticky lg:top-28">
+              <Visual
+                icon={Icon}
+                ratio="aspect-[4/3]"
+                photo={product.image || undefined}
+                alt={`${product.name} grains`}
+                label="Product Image Coming Soon"
+                priority
+              />
+
+              <div className="flex flex-col gap-4 rounded-3xl border border-cream-line bg-surface p-6">
+                <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Typical Applications</h2>
+                <ul className="flex flex-wrap gap-2">
+                  {product.applications.map((a) => (
+                    <li
+                      key={a}
+                      className="flex items-center gap-1.5 rounded-full bg-primary-tint px-3 py-1.5 text-xs font-medium text-primary"
+                    >
+                      <CheckIcon className="h-3.5 w-3.5 shrink-0" />
+                      {a}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </Reveal>
-          <Reveal delay={100} className="flex flex-col gap-6">
-            <div className="flex flex-col gap-3">
+
+          <Reveal delay={100} className="flex flex-col gap-10">
+            <div className="flex flex-col gap-4">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
-                  {product.categories[0]}
-                </span>
+                {product.categories.map((category) => (
+                  <span
+                    key={category}
+                    className="rounded-full border border-gold/40 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-gold"
+                  >
+                    {category}
+                  </span>
+                ))}
+              </div>
+              <h1 className="font-display text-3xl leading-tight text-ink sm:text-4xl lg:text-[2.75rem]">
+                {product.name}
+              </h1>
+              <div className="flex flex-wrap items-center gap-2">
                 {product.badge ? (
-                  <span className="rounded-full border border-gold/40 bg-primary-tint px-3 py-0.5 text-xs font-semibold text-primary">
+                  <span className="rounded-full bg-primary-tint px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-wide text-primary">
                     {product.badge}
                   </span>
                 ) : null}
+                {product.placeholder ? <Badge tone="pending">Product Details Coming Soon</Badge> : null}
               </div>
-              <h1 className="font-display text-3xl text-ink sm:text-4xl">{product.name}</h1>
-              {product.placeholder ? <Badge tone="pending">Product Details Coming Soon</Badge> : null}
-              <p className="text-base leading-relaxed text-ink-soft">{product.description}</p>
+              <p className="text-base leading-relaxed text-ink-soft sm:text-lg">{product.description}</p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 rounded-2xl border border-cream-line bg-surface p-6">
-              {product.specs.map((spec) => (
-                <div key={spec.label} className="flex flex-col gap-1">
-                  <span className="text-xs uppercase tracking-wide text-ink-faint">{spec.label}</span>
-                  <span className="text-sm font-medium text-ink">{spec.value}</span>
-                </div>
-              ))}
+            <div className="flex flex-col overflow-hidden rounded-3xl border border-cream-line bg-surface">
+              <div className="flex flex-col gap-1.5 border-b border-cream-line bg-cream/60 px-6 py-5">
+                <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                  Specifications
+                </h2>
+                <p className="text-sm text-ink-soft">
+                  Confirmed specifications will be published here once verified by Ramya Rice.
+                </p>
+              </div>
+              <dl className="divide-y divide-cream-line">
+                {product.specs.map((spec) => {
+                  const pending = spec.value === "Coming Soon";
+                  return (
+                    <div key={spec.label} className="flex items-center justify-between gap-4 px-6 py-3.5">
+                      <dt className="text-sm text-ink-soft">{spec.label}</dt>
+                      <dd
+                        className={
+                          pending
+                            ? "rounded-full border border-dashed border-cream-line px-2.5 py-0.5 text-[0.68rem] font-semibold uppercase tracking-wide text-ink-faint"
+                            : "text-sm font-medium text-ink"
+                        }
+                      >
+                        {spec.value}
+                      </dd>
+                    </div>
+                  );
+                })}
+              </dl>
             </div>
 
             <div className="flex flex-col gap-3">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-ink">Packaging Options</h2>
+              <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Packaging Options</h2>
               {product.packaging.length ? (
                 <div className="flex flex-wrap gap-2">
                   {product.packaging.map((p) => (
@@ -147,49 +197,38 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               )}
             </div>
 
-            <div className="flex flex-col gap-3">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-ink">Applications</h2>
-              <ul className="flex flex-col gap-2">
-                {product.applications.map((a) => (
-                  <li key={a} className="flex items-center gap-2 text-sm text-ink-soft">
-                    <CheckIcon className="h-4 w-4 text-primary" />
-                    {a}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex flex-col gap-4 pt-2 sm:flex-row">
-              <Button href="/contact" variant="primary" size="lg" className="justify-center">
-                Request a Quote
-              </Button>
-              <Button
-                href={whatsappLink(productEnquiryMessage(product.name))}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="secondary"
-                size="lg"
-                className="justify-center"
-                icon={<WhatsAppIcon className="h-5 w-5" />}
-              >
-                Enquire on WhatsApp
-              </Button>
-            </div>
+            <ProductEnquiryForm productName={product.name} />
           </Reveal>
         </Container>
       </section>
 
-      {related.length ? (
+      {others.length ? (
         <section className="bg-cream-deep py-20 sm:py-24">
           <Container className="flex flex-col gap-10">
-            <h2 className="font-display text-2xl text-ink">More from {product.categories[0]}</h2>
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((p, i) => (
-                <Reveal key={p.slug} delay={(i % 3) * 130} className="h-full product-pop">
-                  <ProductCard product={p} index={i} />
-                </Reveal>
-              ))}
+            <div className="flex flex-col gap-2">
+              <h2 className="font-display text-2xl text-ink sm:text-3xl">Other Varieties</h2>
+              <p className="text-sm text-ink-soft">Explore the rest of the Ramya Rice range.</p>
             </div>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              {others.map((p) => (
+                <li key={p.slug}>
+                  <Link
+                    href={`/products/${p.slug}`}
+                    className="group flex items-center justify-between gap-4 rounded-2xl border border-cream-line bg-surface px-6 py-5 transition-colors duration-300 hover:border-gold/60"
+                  >
+                    <span className="flex flex-col gap-1">
+                      <span className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-gold">
+                        {p.categories[0]}
+                      </span>
+                      <span className="font-display text-lg text-ink transition-colors group-hover:text-primary">
+                        {p.name}
+                      </span>
+                    </span>
+                    <ArrowUpRightIcon className="h-5 w-5 shrink-0 text-primary transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </Container>
         </section>
       ) : null}

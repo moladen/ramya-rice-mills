@@ -173,37 +173,57 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* Leadership */}
+      {/* Founders & Leadership */}
       <section className="bg-cream-deep py-20 sm:py-28">
-        <Container className="flex flex-col gap-12">
+        <Container className="flex flex-col gap-14">
           <Reveal>
             <SectionHeader
-              eyebrow="Leadership"
-              title="Founders Driving Ramya Rice"
-              description="Led by founders who bring together agricultural roots and international business experience."
+              eyebrow="Founders & Leadership"
+              title="Two perspectives. One shared vision."
+              description="Ramya Rice is led by two founders: one grounded in agriculture and civil infrastructure, the other with international business and professional experience across India, the UK and Germany."
               align="center"
             />
           </Reveal>
-          <div className="grid gap-8 sm:grid-cols-2">
+          <div className="grid gap-8 lg:grid-cols-2">
             {LEADERSHIP.map((person, i) => (
-              <Reveal key={person.key} delay={i * 90}>
-                <div className="flex h-full flex-col gap-5 rounded-3xl border border-cream-line bg-surface p-8 sm:p-10">
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="font-display text-2xl text-ink">{person.name}</h3>
-                    <span className="text-sm font-semibold text-primary">{person.title}</span>
+              <Reveal key={person.key} delay={i * 90} className="h-full">
+                <article className="flex h-full flex-col gap-7 rounded-3xl border border-cream-line bg-surface p-6 sm:p-10">
+                  <Visual
+                    icon={i === 0 ? LeafIcon : GlobeIcon}
+                    tone="cream"
+                    ratio="aspect-[4/3]"
+                    label="Photo Coming Soon"
+                  />
+                  <div className="flex flex-col gap-3">
+                    <h3 className="font-display text-2xl text-ink sm:text-3xl">{person.name}</h3>
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                      {person.title}
+                    </span>
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {person.qualifications.map((q) => (
+                        <span
+                          key={q}
+                          className="inline-flex w-fit items-center rounded-full bg-primary-tint px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary"
+                        >
+                          {q}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <span className="inline-flex w-fit items-center rounded-full bg-primary-tint px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
-                    {person.qualification}
-                  </span>
-                  <ul className="flex flex-col gap-2.5 border-t border-cream-line pt-4">
-                    {person.highlights.map((highlight) => (
-                      <li key={highlight} className="flex items-start gap-2.5 text-sm text-ink-soft">
+                  <div className="flex flex-col gap-4 text-base leading-relaxed text-ink-soft">
+                    {person.bio.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                  <ul className="mt-auto flex flex-col gap-2.5 border-t border-cream-line pt-6">
+                    {person.experience.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-sm text-ink-soft">
                         <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                        {highlight}
+                        {item}
                       </li>
                     ))}
                   </ul>
-                </div>
+                </article>
               </Reveal>
             ))}
           </div>

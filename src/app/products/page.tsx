@@ -3,7 +3,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/ui/CTASection";
-import { ProductsExperience } from "@/components/products/ProductsExperience";
+import { ProductCatalogue } from "@/components/products/ProductCatalogue";
 import { GrainIcon, LeafIcon, WheatIcon, ShieldCheckIcon, GearIcon, GlobeIcon, DownloadIcon } from "@/components/icons";
 import { PRODUCTS, PRODUCT_CATEGORIES } from "@/data/products";
 import { buildMetadata } from "@/lib/seo";
@@ -68,10 +68,10 @@ export default function ProductsPage() {
         </Container>
       </section>
 
-      {/* FEATURED PRODUCT CAROUSEL */}
-      <section className="py-20 sm:py-28">
+      {/* PRODUCT CATALOGUE */}
+      <section className="py-16 sm:py-24">
         <Container>
-          <ProductsExperience products={PRODUCTS} categories={PRODUCT_CATEGORIES} />
+          <ProductCatalogue products={PRODUCTS} categories={PRODUCT_CATEGORIES} />
         </Container>
       </section>
 

@@ -8,7 +8,7 @@ import { StatCard } from "@/components/ui/StatCard";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { CTASection } from "@/components/ui/CTASection";
 import { HeroVisual } from "@/components/home/HeroVisual";
-import { ProductShowcase } from "@/components/home/ProductShowcase";
+import { ProductCatalogue } from "@/components/products/ProductCatalogue";
 import { QualityJourney } from "@/components/home/QualityJourney";
 import { BusinessSolutionsShowcase } from "@/components/home/BusinessSolutionsShowcase";
 import { GlobalPresenceVisual } from "@/components/home/GlobalPresenceVisual";
@@ -262,15 +262,10 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* OUR RICE COLLECTION — a large featured-product showcase (center image
-          flanked by recessed prev/next previews, category filter, arrow/swipe/
-          keyboard navigation) rather than the plain 3-column grid the catalogue
-          page (/products) uses, so the homepage's product moment matches the
-          hero's premium visual language. See ProductShowcase's file note for
-          why it's a separate component from the one /products relies on. A
-          faint grain texture + two soft brand-tint blobs give the section some
-          depth instead of flat cream; Container gets z-10 so its content sits
-          above both (bg-grain's ::before overlay is itself z-index:1). */}
+      {/* OUR RICE COLLECTION — the same catalogue layout as /products. A faint
+          grain texture + two soft brand-tint blobs give the section some depth
+          instead of flat cream; Container gets z-10 so its content sits above
+          both (bg-grain's ::before overlay is itself z-index:1). */}
       <section className="bg-grain relative overflow-hidden py-20 sm:py-28">
         <div className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full bg-gold-tint blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-primary-tint blur-3xl" />
@@ -284,7 +279,7 @@ export default function Home() {
             />
           </Reveal>
           <Reveal delay={100}>
-            <ProductShowcase products={PRODUCTS} categories={PRODUCT_CATEGORIES} />
+            <ProductCatalogue products={PRODUCTS} categories={PRODUCT_CATEGORIES} compact />
           </Reveal>
           <Reveal delay={150} className="flex justify-center">
             <Button href="/products" variant="ghost" size="md" icon={<ChevronRightIcon className="h-4 w-4" />}>

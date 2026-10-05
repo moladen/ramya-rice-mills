@@ -24,13 +24,15 @@ export function ProductImage({
   if (!product.image) {
     const Icon = ICONS[product.icon];
     return (
-      <div className="bg-grain absolute inset-0 flex flex-col items-center justify-center gap-2.5 bg-gradient-to-br from-cream-deep via-cream to-cream-line text-primary">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-white/50 backdrop-blur-sm">
-          <Icon className="h-6 w-6" strokeWidth={1.3} />
-        </span>
-        <span className="px-4 text-center text-[0.62rem] font-semibold uppercase tracking-[0.18em] opacity-70">
-          Product Image Coming Soon
-        </span>
+      <div className="absolute inset-0">
+        <div className="bg-grain flex h-full w-full flex-col items-center justify-center gap-2.5 bg-gradient-to-br from-cream-deep via-cream to-cream-line text-primary">
+          <span className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-white/50 backdrop-blur-sm">
+            <Icon className="h-6 w-6" strokeWidth={1.3} />
+          </span>
+          <span className="px-4 text-center text-[0.62rem] font-semibold uppercase tracking-[0.18em] opacity-70">
+            Product Image Coming Soon
+          </span>
+        </div>
       </div>
     );
   }
